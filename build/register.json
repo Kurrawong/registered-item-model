@@ -1,0 +1,184 @@
+{
+  "metaRegistry": "https://w3id.org/ogc/bblocks/meta-register.json",
+  "name": "Registered Item Model",
+  "abstract": "A base RDF and SHACL model for register items, register item classes and register\ngovernance metadata, aligned with ISO 19135:2026 (*Geographic information \u2014 Registration\nand register governance*). Sub-registers profile this model rather than inventing their own.\n",
+  "description": "A register is a catalogue with systematic governance: a content information model\n(what an item looks like) plus management metadata (who governs it, what state it is\nin, how it changes). ISO 19135:2026 defines one such register model \u2014 separating a\n**concept plane** (meaning: concepts and concept versions) from a **content plane**\n(representation: register item classes and register items) and adding a governance\nlayer of roles, statuses, actions and commitments.\n\nThis repository publishes that model as a single base [OGC Building\nBlock](https://ogcincubator.github.io/bblocks-docs/), independent of any one register's\nown content schema. Any register \u2014 a CSV catalogue, the OGC Definitions Server, a\nGitHub-managed vocabulary, or a Building Blocks register itself \u2014 maps its own\nschema's identifiers, statuses and roles onto this base model via a JSON-LD context,\nso that management metadata from otherwise unrelated registers becomes one queryable\ngraph. A sub-register's rules are expressed as a profile of this base block (null,\nadditive, or constrained), always validating against it.\n\nRegister vs. registry: the **register** is the governed information (items,\nidentifiers, statuses, roles, processes); the **register system** \u2014 often loosely\ncalled the \"registry\" \u2014 is merely the information system it happens to run on. This\nmodel describes the former, independent of the latter.\n",
+  "modified": "2026-09-17T02:04:51.162940",
+  "tooling": {
+    "bblocks-postprocess": {
+      "commitId": "\"3d8bea5cf043babc6562760d91d3841b79f2d7a5",
+      "shortCommitId": "\"3d8bea",
+      "date": "2026-09-16T22:31:53+00:00\""
+    }
+  },
+  "gitRepository": "https://github.com/ogcincubator/registered-item-model",
+  "gitHubRepository": "https://github.com/ogcincubator/registered-item-model/blob/master/",
+  "baseURL": "https://ogcincubator.github.io/registered-item-model/",
+  "viewerURL": "https://ogcincubator.github.io/registered-item-model/",
+  "validationReport": "https://ogcincubator.github.io/registered-item-model/build/tests/report.html",
+  "validationReportJson": "https://ogcincubator.github.io/registered-item-model/build/tests/report.json",
+  "imports": [
+    "https://opengeospatial.github.io/bblocks/register.json",
+    "https://ogcincubator.github.io/cross-domain-model/build/register.json",
+    "https://ogcincubator.github.io/bblocks-stac/build/register.json"
+  ],
+  "bblocks": [
+    {
+      "itemIdentifier": "ogc.model.registered-item.core-ontology",
+      "name": "Registered Item Model",
+      "highlighted": true,
+      "title": "Base RDF/OWL and SHACL model for register items and register governance",
+      "abstract": "A base RDF and SHACL model for register items, register item classes and register governance metadata, based on ISO 19135:2026.",
+      "description": "A register is a catalogue distinguished from a plain dataset by systematic governance: a content information model (register item classes and register items) plus management metadata (identifiers, statuses, actions, roles). ISO 19135:2026 defines one such model, separating a concept plane (meaning) from a content plane (representation) and adding roles, statuses, actions, relations and commitments on top. This block publishes that model as a single base building block so that many registers with different native schemas \u2014 a CSV catalogue, the OGC Definitions Server, a GitHub-managed vocabulary, or a Building Blocks register itself \u2014 can each map their own fields onto it via a JSON-LD context, and be queried as one graph. Sub-registers are expected to profile this block (null, additive or constrained) rather than invent their own register model.",
+      "status": "under-development",
+      "version": "0.1",
+      "itemClass": "model",
+      "group": "Registered Item Model",
+      "dependsOn": [
+        "bblocks://ogc.model.cross-domain.prov"
+      ],
+      "concept": [
+        "https://w3id.org/ogc/rim/RegisterItem"
+      ],
+      "shaclShapes": {
+        "ogc.model.registered-item.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ],
+        "ogc.model.cross-domain.prov": [
+          "https://ogcincubator.github.io/cross-domain-model/_sources/prov/shapes.shacl"
+        ]
+      },
+      "sources": [
+        {
+          "title": "ISO 19135:2026, Geographic information \u2014 Registration and register governance",
+          "link": "https://www.iso.org/standard/86261.html"
+        },
+        {
+          "title": "Registers and register governance for federated semantic resources (companion analysis)",
+          "link": "https://github.com/ogcincubator/bblocks-docs/blob/master/design/register-governance.md"
+        }
+      ],
+      "tags": [
+        "register",
+        "governance",
+        "ISO 19135",
+        "metadata"
+      ],
+      "dateTimeAddition": "2026-09-17T00:00:00Z",
+      "dateOfLastChange": "2026-09-17",
+      "ontology": "https://ogcincubator.github.io/registered-item-model/build/annotated/model/registered-item/core-ontology/ontology.ttl",
+      "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/ogcincubator/registered-item-model/blob/master/build/tests/model/registered-item/core-ontology/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/markdown/model/registered-item/core-ontology/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/json-full/model/registered-item/core-ontology/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://ogcincubator.github.io/registered-item-model/bblock/ogc.model.registered-item.core-ontology"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.model.registered-item.ml-activity-profile",
+      "name": "ML Activity Profile",
+      "title": "Machine learning training/inference activities, profiled from the Registered Item Model",
+      "abstract": "A profile of the Registered Item Model describing machine learning training and inference runs as typed register actions, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary.",
+      "description": "The STAC Machine Learning Model (MLM) extension describes a model as a static artifact \u2014 a STAC Item or Collection with declared inputs, outputs and requirements \u2014 but has no notion of a particular run of that model. This block adds that: mlact:MLActivity (with mlact:TrainingActivity and mlact:InferenceActivity sub-types) is a rim:RegisterAction, and so a prov:Activity, recording one execution. In this ecosystem, running a model is itself a governed act \u2014 typically the one that adds a derived product to a register as a new rim:RegisterItem \u2014 so the run belongs in the same audit trail as any other register action. The activity's task, framework and accelerator are drawn from the MLM extension's own SKOS schemes rather than redefined, and its recorded inputs/outputs (mlact:ActivityInput / mlact:ActivityOutput, both prov:Entity) each declare via dct:conformsTo which of the model's own declared mlm:ModelInput/mlm:ModelOutput specifications they realise.",
+      "status": "under-development",
+      "version": "0.1",
+      "itemClass": "model",
+      "group": "Registered Item Model",
+      "isProfileOf": [
+        "bblocks://ogc.model.registered-item.core-ontology"
+      ],
+      "dependsOn": [
+        "bblocks://ogc.contrib.stac.extensions.mlm-ontology"
+      ],
+      "concept": [
+        "https://w3id.org/ogc/rim/ml-activity/MLActivity"
+      ],
+      "shaclShapes": {
+        "ogc.model.registered-item.ml-activity-profile": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/ml-activity-profile/shapes.shacl"
+        ],
+        "ogc.contrib.stac.extensions.mlm-ontology": [
+          "https://ogcincubator.github.io/bblocks-stac/_sources/extensions/mlm-ontology/shapes.shacl"
+        ],
+        "ogc.model.registered-item.core-ontology": [
+          "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
+        ],
+        "ogc.model.cross-domain.prov": [
+          "https://ogcincubator.github.io/cross-domain-model/_sources/prov/shapes.shacl"
+        ]
+      },
+      "sources": [
+        {
+          "title": "STAC Machine Learning Model (MLM) Extension Ontology building block",
+          "link": "https://github.com/ogcincubator/bblocks-stac/tree/master/_sources/extensions/mlm-ontology"
+        },
+        {
+          "title": "STAC MLM extension README (field descriptions and example)",
+          "link": "https://github.com/stac-extensions/mlm/blob/main/README.md"
+        },
+        {
+          "title": "W3C PROV-O",
+          "link": "https://www.w3.org/TR/prov-o/"
+        }
+      ],
+      "tags": [
+        "machine learning",
+        "provenance",
+        "MLM",
+        "register"
+      ],
+      "dateTimeAddition": "2026-09-17T00:00:00Z",
+      "dateOfLastChange": "2026-09-17",
+      "ontology": "https://ogcincubator.github.io/registered-item-model/build/annotated/model/registered-item/ml-activity-profile/ontology.ttl",
+      "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/ml-activity-profile/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/ogcincubator/registered-item-model/blob/master/build/tests/model/registered-item/ml-activity-profile/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/markdown/model/registered-item/ml-activity-profile/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/generateddocs/json-full/model/registered-item/ml-activity-profile/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://ogcincubator.github.io/registered-item-model/bblock/ogc.model.registered-item.ml-activity-profile"
+        }
+      }
+    }
+  ],
+  "remoteCacheDir": "https://ogcincubator.github.io/registered-item-model/build/annotated/_cache",
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://ogcincubator.github.io/registered-item-model/build/register.json",
+      "type": "application/json",
+      "title": "This Building Blocks Register in JSON format"
+    },
+    {
+      "rel": "self",
+      "href": "https://ogcincubator.github.io/registered-item-model/build/bblocks.ttl",
+      "type": "text/turtle",
+      "title": "This Building Blocks Register in RDF Turtle format"
+    },
+    {
+      "rel": "self",
+      "href": "https://ogcincubator.github.io/registered-item-model/build/bblocks.jsonld",
+      "type": "application/ld+json",
+      "title": "This Building Blocks Register in JSON-LD format"
+    }
+  ]
+}
