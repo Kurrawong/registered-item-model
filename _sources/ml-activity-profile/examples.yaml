@@ -1,0 +1,79 @@
+prefixes:
+  mlact: https://w3id.org/ogc/rim/ml-activity/
+  rim: https://w3id.org/ogc/rim/
+  mlm: https://w3id.org/ogc/stac/mlm/
+  stac: https://w3id.org/ogc/stac/core/
+  prov: http://www.w3.org/ns/prov#
+  dct: http://purl.org/dc/terms/
+  xsd: http://www.w3.org/2001/XMLSchema#
+  ex: https://example.org/registers/ml-activities/
+
+examples:
+  - title: An inference run that adds its result to a register
+    content: |
+      A land-cover segmentation model, described as a STAC Item per the MLM extension, is run
+      against a Sentinel-2 scene. The run is recorded as an `mlact:InferenceActivity`: itself a
+      `rim:RegisterAction`, because in this ecosystem running a model is a governed act — here,
+      the one that adds the predicted mask to the register as a new `rim:RegisterItem`. The
+      activity's task, framework and accelerator are all drawn from the MLM extension's own
+      controlled vocabularies; its input and output entities each declare, via `dct:conformsTo`,
+      which of the model's declared `mlm:ModelInput`/`mlm:ModelOutput` specifications they realise.
+    snippets:
+      - language: turtle
+        code: |
+          ex:landCoverModel a stac:Item ;
+              mlm:name "Land Cover Classifier" ;
+              mlm:architecture "U-Net" ;
+              mlm:tasks mlm:semantic-segmentation ;
+              mlm:framework "PyTorch" ;
+              mlm:input ex:landCoverInputSpec ;
+              mlm:output ex:landCoverOutputSpec .
+
+          ex:landCoverInputSpec a mlm:ModelInput ;
+              mlm:io_name "sentinel2_bands" ;
+              mlm:input_structure ex:landCoverInputStructure .
+
+          ex:landCoverInputStructure a mlm:InputStructure ;
+              mlm:shape -1, 4, 512, 512 ;
+              mlm:dim_order "batch", "channel", "height", "width" ;
+              mlm:data_type "float32" .
+
+          ex:landCoverOutputSpec a mlm:ModelOutput ;
+              mlm:io_name "segmentation_mask" ;
+              mlm:result ex:landCoverResultStructure .
+
+          ex:landCoverResultStructure a mlm:ResultStructure ;
+              mlm:shape -1, 10, 512, 512 ;
+              mlm:dim_order "batch", "class", "height", "width" ;
+              mlm:data_type "uint8" .
+
+          ex:sceneChip a mlact:ActivityInput ;
+              dct:conformsTo ex:landCoverInputSpec ;
+              mlact:structure ex:landCoverInputStructure .
+
+          ex:predictedMask a mlact:ActivityOutput ;
+              dct:conformsTo ex:landCoverOutputSpec ;
+              mlact:structure ex:landCoverResultStructure .
+
+          ex:inference2026-09-01 a mlact:InferenceActivity ;
+              mlact:model ex:landCoverModel ;
+              mlact:performsTask mlm:semantic-segmentation ;
+              mlact:framework "PyTorch" ;
+              mlact:accelerator mlm:cuda ;
+              mlact:input ex:sceneChip ;
+              mlact:output ex:predictedMask ;
+              rim:actionType rim:additionAction ;
+              rim:appliesTo ex:predictedItem ;
+              prov:startedAtTime "2026-09-01T10:00:00Z"^^xsd:dateTime ;
+              prov:endedAtTime "2026-09-01T10:00:05Z"^^xsd:dateTime .
+
+          ex:predictedItem a rim:RegisterItem ;
+              dct:title "Predicted land cover mask, scene S2A_2026-09-01" ;
+              rim:itemClass ex:derivedProductItemClass ;
+              rim:objectIdentifier "https://example.org/registers/ml-activities/items/predicted-mask-2026-09-01"^^xsd:anyURI ;
+              rim:validityStatus rim:valid ;
+              rim:publicationStatus rim:published ;
+              rim:hasAction ex:inference2026-09-01 .
+
+          ex:derivedProductItemClass a rim:RegisterItemClass ;
+              dct:title "Derived ML product" .

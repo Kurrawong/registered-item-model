@@ -1,0 +1,44 @@
+{
+  "name": "ML Activity Profile",
+  "title": "Machine learning training/inference activities, profiled from the Registered Item Model",
+  "abstract": "A profile of the Registered Item Model describing machine learning training and inference runs as typed register actions, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary.",
+  "description": "The STAC Machine Learning Model (MLM) extension describes a model as a static artifact — a STAC Item or Collection with declared inputs, outputs and requirements — but has no notion of a particular run of that model. This block adds that: mlact:MLActivity (with mlact:TrainingActivity and mlact:InferenceActivity sub-types) is a rim:RegisterAction, and so a prov:Activity, recording one execution. In this ecosystem, running a model is itself a governed act — typically the one that adds a derived product to a register as a new rim:RegisterItem — so the run belongs in the same audit trail as any other register action. The activity's task, framework and accelerator are drawn from the MLM extension's own SKOS schemes rather than redefined, and its recorded inputs/outputs (mlact:ActivityInput / mlact:ActivityOutput, both prov:Entity) each declare via dct:conformsTo which of the model's own declared mlm:ModelInput/mlm:ModelOutput specifications they realise.",
+  "status": "under-development",
+  "version": "0.1",
+  "itemClass": "model",
+  "group": "Registered Item Model",
+  "isProfileOf": [
+    "bblocks://ogc.model.registered-item.core-ontology"
+  ],
+  "dependsOn": [
+    "bblocks://ogc.contrib.stac.extensions.mlm-ontology"
+  ],
+  "concept": [
+    "https://w3id.org/ogc/rim/ml-activity/MLActivity"
+  ],
+  "shaclShapes": [
+    "shapes.shacl"
+  ],
+  "sources": [
+    {
+      "title": "STAC Machine Learning Model (MLM) Extension Ontology building block",
+      "link": "https://github.com/ogcincubator/bblocks-stac/tree/master/_sources/extensions/mlm-ontology"
+    },
+    {
+      "title": "STAC MLM extension README (field descriptions and example)",
+      "link": "https://github.com/stac-extensions/mlm/blob/main/README.md"
+    },
+    {
+      "title": "W3C PROV-O",
+      "link": "https://www.w3.org/TR/prov-o/"
+    }
+  ],
+  "tags": [
+    "machine learning",
+    "provenance",
+    "MLM",
+    "register"
+  ],
+  "dateTimeAddition": "2026-09-17T00:00:00Z",
+  "dateOfLastChange": "2026-09-17"
+}

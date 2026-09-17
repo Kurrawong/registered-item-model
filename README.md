@@ -27,6 +27,13 @@ See [`_sources/core-ontology/README.md`](_sources/core-ontology/README.md) for w
 covers, and the block's `bblock.json` `sources` for the ISO 19135:2026 reference and the companion
 design analysis this repository is grounded in.
 
+## Profiles
+
+[`_sources/ml-activity-profile`](_sources/ml-activity-profile) is a first worked profile: it
+specialises `rim:RegisterAction` to describe machine learning training/inference runs, built on the
+STAC Machine Learning Model (MLM) extension's ontology. Profile blocks share
+`"group": "Registered Item Model"` in their `bblock.json` so the viewer groups them together.
+
 ## Where this could live
 
 This repository realises the model as a standalone Building Blocks register. That was one of

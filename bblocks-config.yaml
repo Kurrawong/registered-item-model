@@ -32,5 +32,6 @@ identifier-prefix: ogc.model.registered-item.
 imports:
   - default
   - https://ogcincubator.github.io/cross-domain-model
+  - https://ogcincubator.github.io/bblocks-stac
 
 schema-oas30-downcompile: False
