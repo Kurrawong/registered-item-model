@@ -1,0 +1,37 @@
+{
+  "name": "Registered Item Model",
+  "highlighted": true,
+  "title": "Base RDF/OWL and SHACL model for register items and register governance",
+  "abstract": "A base RDF and SHACL model for register items, register item classes and register governance metadata, based on ISO 19135:2026.",
+  "description": "A register is a catalogue distinguished from a plain dataset by systematic governance: a content information model (register item classes and register items) plus management metadata (identifiers, statuses, actions, roles). ISO 19135:2026 defines one such model, separating a concept plane (meaning) from a content plane (representation) and adding roles, statuses, actions, relations and commitments on top. This block publishes that model as a single base building block so that many registers with different native schemas — a CSV catalogue, the OGC Definitions Server, a GitHub-managed vocabulary, or a Building Blocks register itself — can each map their own fields onto it via a JSON-LD context, and be queried as one graph. Sub-registers are expected to profile this block (null, additive or constrained) rather than invent their own register model.",
+  "status": "under-development",
+  "version": "0.1",
+  "itemClass": "model",
+  "dependsOn": [
+    "ogc.model.cross-domain.prov"
+  ],
+  "concept": [
+    "https://w3id.org/ogc/rim/RegisterItem"
+  ],
+  "shaclShapes": [
+    "shapes.shacl"
+  ],
+  "sources": [
+    {
+      "title": "ISO 19135:2026, Geographic information — Registration and register governance",
+      "link": "https://www.iso.org/standard/86261.html"
+    },
+    {
+      "title": "Registers and register governance for federated semantic resources (companion analysis)",
+      "link": "https://github.com/ogcincubator/bblocks-docs/blob/master/design/register-governance.md"
+    }
+  ],
+  "tags": [
+    "register",
+    "governance",
+    "ISO 19135",
+    "metadata"
+  ],
+  "dateTimeAddition": "2026-09-17T00:00:00Z",
+  "dateOfLastChange": "2026-09-17"
+}

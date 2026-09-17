@@ -1,0 +1,84 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix rim:  <https://w3id.org/ogc/rim/> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A text-valued property may be a plain xsd:string or a language-tagged rdf:langString.
+rim:TextShape a sh:NodeShape ;
+    sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) .
+
+# SHACL shapes for the base Registered Item Model. These express only the
+# "required core" ISO 19135:2026 sets for every register type — an item
+# class, an object identifier, and validity + publication status on
+# whatever carries them — plus datatype/range constraints elsewhere.
+# Everything else is left unconstrained here so that a sub-register can
+# add its own requirements (null, additive or constrained) as a profile
+# of this block without fighting a stricter base shape.
+
+rim:RegisterItemShape a sh:NodeShape ;
+    sh:targetClass rim:RegisterItem ;
+    sh:property [ sh:path rim:objectIdentifier ;     sh:datatype xsd:anyURI ;         sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:functionalIdentifier ; sh:datatype xsd:anyURI ;         sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:itemClass ;            sh:class rim:RegisterItemClass ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:inRegister ;           sh:class rim:Register ;          sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:validityStatus ;       sh:class rim:ValidityStatus ;    sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:publicationStatus ;    sh:class rim:PublicationStatus ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:isRedacted ;           sh:datatype xsd:boolean ;        sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:isDeleted ;            sh:datatype xsd:boolean ;        sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:realizes ;             sh:class rim:ConceptVersion ;    sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:hasAction ;            sh:class rim:RegisterAction ] ;
+    sh:property [ sh:path rim:relatedItem ;          sh:class rim:RegisterItem ] ;
+    sh:property [ sh:path rim:supersededBy ;         sh:class rim:RegisterItem ] ;
+    sh:property [ sh:path rim:supersedes ;           sh:class rim:RegisterItem ] ;
+    sh:property [ sh:path dct:title ;                sh:node rim:TextShape ;          sh:maxCount 1 ] ;
+    sh:property [ sh:path dct:description ;          sh:node rim:TextShape ] .
+
+rim:RegisterItemClassShape a sh:NodeShape ;
+    sh:targetClass rim:RegisterItemClass ;
+    sh:property [ sh:path dct:title ;       sh:node rim:TextShape ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path dct:description ; sh:node rim:TextShape ] ;
+    sh:property [ sh:path rim:definedIn ;   sh:class rim:Register ;  sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:validatedBy ] .
+
+rim:RegisterShape a sh:NodeShape ;
+    sh:targetClass rim:Register ;
+    sh:property [ sh:path dct:title ;             sh:node rim:TextShape ;             sh:maxCount 1 ] ;
+    sh:property [ sh:path dct:description ;       sh:node rim:TextShape ] ;
+    sh:property [ sh:path rim:hasSpecification ;  sh:class rim:RegisterSpecification ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:runsOn ;            sh:class rim:RegisterSystem ;        sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:hasCommitment ;     sh:class rim:Commitment ] .
+
+rim:RegisterSpecificationShape a sh:NodeShape ;
+    sh:targetClass rim:RegisterSpecification ;
+    sh:property [ sh:path dct:title ;                  sh:node rim:TextShape ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path dct:description ;            sh:node rim:TextShape ] ;
+    sh:property [ sh:path rim:definesSubstantiveChange ; sh:node rim:TextShape ; sh:maxCount 1 ] .
+
+rim:ConceptShape a sh:NodeShape ;
+    sh:targetClass rim:Concept ;
+    sh:property [ sh:path skos:prefLabel ; sh:minCount 1 ] .
+
+rim:ConceptVersionShape a sh:NodeShape ;
+    sh:targetClass rim:ConceptVersion ;
+    sh:property [ sh:path rim:versionOf ;            sh:class rim:Concept ;            sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:objectIdentifier ;     sh:datatype xsd:anyURI ;          sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:functionalIdentifier ; sh:datatype xsd:anyURI ;          sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:validityStatus ;       sh:class rim:ValidityStatus ;     sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:publicationStatus ;    sh:class rim:PublicationStatus ;  sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:isRedacted ;           sh:datatype xsd:boolean ;         sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:isDeleted ;            sh:datatype xsd:boolean ;         sh:maxCount 1 ] .
+
+rim:RegisterActionShape a sh:NodeShape ;
+    sh:targetClass rim:RegisterAction ;
+    sh:property [ sh:path rim:actionType ;          sh:class rim:RegisterActionType ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:changeClassification ; sh:class rim:ChangeClassification ; sh:maxCount 1 ] ;
+    sh:property [ sh:path rim:appliesTo ;           sh:class rim:RegisterItem ;       sh:maxCount 1 ] ;
+    sh:property [ sh:path prov:startedAtTime ;      sh:datatype xsd:dateTime ;        sh:maxCount 1 ] .
+
+rim:CommitmentShape a sh:NodeShape ;
+    sh:targetClass rim:Commitment ;
+    sh:property [ sh:path rim:commitmentCategory ; sh:class rim:CommitmentCategory ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path dct:description ;        sh:node rim:TextShape ;           sh:minCount 1 ] .

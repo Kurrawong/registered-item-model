@@ -1,0 +1,128 @@
+@prefix rim:  <https://w3id.org/ogc/rim/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+#################################################################
+# Validity status
+#################################################################
+
+rim:ValidityStatusScheme a skos:ConceptScheme ;
+    skos:prefLabel "Validity status"@en ;
+    rdfs:comment "The two values of the required validity concern (ISO 19135:2026 §4). A register may not define further values for this concern." .
+
+rim:valid a rim:ValidityStatus, skos:Concept ;
+    skos:inScheme rim:ValidityStatusScheme ;
+    skos:prefLabel "valid"@en ;
+    skos:definition "The register item or concept version is currently in force."@en .
+
+rim:invalid a rim:ValidityStatus, skos:Concept ;
+    skos:inScheme rim:ValidityStatusScheme ;
+    skos:prefLabel "invalid"@en ;
+    skos:definition "The register item or concept version is not currently in force."@en .
+
+#################################################################
+# Publication status
+#################################################################
+
+rim:PublicationStatusScheme a skos:ConceptScheme ;
+    skos:prefLabel "Publication status"@en ;
+    rdfs:comment "The two values of the required publication concern (ISO 19135:2026 §4), independent of validity status." .
+
+rim:published a rim:PublicationStatus, skos:Concept ;
+    skos:inScheme rim:PublicationStatusScheme ;
+    skos:prefLabel "published"@en ;
+    skos:definition "The register item or concept version is currently visible to register users."@en .
+
+rim:unpublished a rim:PublicationStatus, skos:Concept ;
+    skos:inScheme rim:PublicationStatusScheme ;
+    skos:prefLabel "unpublished"@en ;
+    skos:definition "The register item or concept version is not currently visible to register users. Combined with a valid validity status, this is what earlier editions of ISO 19135 called \"retired\"."@en .
+
+#################################################################
+# Register action types
+#################################################################
+
+rim:RegisterActionTypeScheme a skos:ConceptScheme ;
+    skos:prefLabel "Register action type"@en ;
+    rdfs:comment "The defined ways register content changes (ISO 19135:2026 §4). Extensible: a register may define further action types in its register specification." .
+
+rim:additionAction a rim:RegisterActionType, skos:Concept ;
+    skos:inScheme rim:RegisterActionTypeScheme ;
+    skos:prefLabel "addition"@en ;
+    skos:definition "A new register item or concept version is added to the register."@en .
+
+rim:publishAction a rim:RegisterActionType, skos:Concept ;
+    skos:inScheme rim:RegisterActionTypeScheme ;
+    skos:prefLabel "publish"@en ;
+    skos:definition "A register item or concept version is made visible to register users."@en .
+
+rim:unpublishAction a rim:RegisterActionType, skos:Concept ;
+    skos:inScheme rim:RegisterActionTypeScheme ;
+    skos:prefLabel "unpublish"@en ;
+    skos:definition "A register item or concept version is made no longer visible to register users, without affecting its validity."@en .
+
+rim:invalidationAction a rim:RegisterActionType, skos:Concept ;
+    skos:inScheme rim:RegisterActionTypeScheme ;
+    skos:prefLabel "invalidation"@en ;
+    skos:definition "A register item or concept version is marked as no longer in force."@en .
+
+rim:supersessionAction a rim:RegisterActionType, skos:Concept ;
+    skos:inScheme rim:RegisterActionTypeScheme ;
+    skos:prefLabel "supersession"@en ;
+    skos:definition "A register item or concept version is replaced by another, recorded as a relation rather than a status."@en .
+
+rim:redactionAction a rim:RegisterActionType, skos:Concept ;
+    skos:inScheme rim:RegisterActionTypeScheme ;
+    skos:prefLabel "redaction"@en ;
+    skos:definition "Content is removed from a register item for legal or privacy reasons, while the record of the item is retained."@en .
+
+rim:deletionAction a rim:RegisterActionType, skos:Concept ;
+    skos:inScheme rim:RegisterActionTypeScheme ;
+    skos:prefLabel "deletion"@en ;
+    skos:definition "A register item is removed from the register."@en .
+
+#################################################################
+# Change classification
+#################################################################
+
+rim:ChangeClassificationScheme a skos:ConceptScheme ;
+    skos:prefLabel "Change classification"@en ;
+    rdfs:comment "How a register action's impact on downstream users is classified (ISO 19135:2026 §4). The register specification must document, per register, what counts as substantive." .
+
+rim:substantiveChange a rim:ChangeClassification, skos:Concept ;
+    skos:inScheme rim:ChangeClassificationScheme ;
+    skos:prefLabel "substantive"@en ;
+    skos:definition "The change has major impact on use, typically altering semantics or technical meaning; downstream users are obliged to act."@en .
+
+rim:clarifyingChange a rim:ChangeClassification, skos:Concept ;
+    skos:inScheme rim:ChangeClassificationScheme ;
+    skos:prefLabel "clarifying"@en ;
+    skos:definition "The change has minor impact, such as an editorial correction, and causes no compatibility issue for downstream users."@en .
+
+rim:correctionalChange a rim:ChangeClassification, skos:Concept ;
+    skos:inScheme rim:ChangeClassificationScheme ;
+    skos:prefLabel "correctional"@en ;
+    skos:definition "A correction to the record itself, available only in the most capable ISO 19135:2026 register types."@en .
+
+#################################################################
+# Commitment categories
+#################################################################
+
+rim:CommitmentCategoryScheme a skos:ConceptScheme ;
+    skos:prefLabel "Commitment category"@en ;
+    rdfs:comment "The three groups of promise a register may make to its users (ISO 19135:2026 §9)." .
+
+rim:accessCommitment a rim:CommitmentCategory, skos:Concept ;
+    skos:inScheme rim:CommitmentCategoryScheme ;
+    skos:prefLabel "access"@en ;
+    skos:definition "A commitment about access to metadata, to current content, or to historic content."@en .
+
+rim:persistenceCommitment a rim:CommitmentCategory, skos:Concept ;
+    skos:inScheme rim:CommitmentCategoryScheme ;
+    skos:prefLabel "persistence"@en ;
+    skos:definition "A commitment about identifier persistence, metadata persistence and retention, content persistence and retention, or historic persistence with full traceability."@en .
+
+rim:transparencyCommitment a rim:CommitmentCategory, skos:Concept ;
+    skos:inScheme rim:CommitmentCategoryScheme ;
+    skos:prefLabel "transparency"@en ;
+    skos:definition "A commitment about the transparency of metadata, of content, or of history."@en .
