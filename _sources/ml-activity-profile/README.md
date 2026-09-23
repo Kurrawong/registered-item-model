@@ -1,7 +1,9 @@
 # ML Activity Profile
 
 A [profile](https://ogcincubator.github.io/bblocks-docs/) of the
-[Registered Item Model](../core-ontology) that describes machine learning training and inference
+[Geoprocessing Activity Profile](../geoprocessing-activity), and so of the
+[Activity Type Register Profile](../activity-type) and the
+[Registered Item Model](../core-ontology). It describes machine learning training and inference
 runs as typed register actions, built on the
 [STAC Machine Learning Model (MLM) extension ontology](https://github.com/ogcincubator/bblocks-stac/tree/master/_sources/extensions/mlm-ontology).
 
@@ -14,6 +16,11 @@ class for that: `rim:RegisterAction`, a `prov:Activity` recording who or what di
 and why. This block adds `mlact:MLActivity` as a sub-class of `rim:RegisterAction`, because in this
 ecosystem running a model is itself a governed act — typically the one that adds a derived product
 to a register as a new `rim:RegisterItem`.
+
+MLM models consume spatiotemporal assets, so `mlact:MLActivity` is also a sub-class of
+`geoproc:GeoprocessingActivity`. Its sub-classes, and narrower ones a register defines (for example
+"land cover segmentation"), can therefore be registered as activity types in a geoprocessing
+activity type register, each with an optional plan of required steps.
 
 ## What it adds
 
@@ -28,6 +35,13 @@ to a register as a new `rim:RegisterItem`.
   (the model's declared *specification*). Each links back to the specification it realises via
   `dct:conformsTo`, and to its actual tensor shape/dtype via `mlact:structure`, reusing MLM's own
   `InputStructure`/`ResultStructure` classes rather than redefining them.
+
+- **Activity type constraints** — a registered sub-class of `mlact:MLActivity` must declare at
+  least one `acttype:usedEntityType` that is (a sub-class of) `mlact:ActivityInput`. A registered
+  sub-class of `mlact:InferenceActivity` must also declare an `acttype:generatedEntityType` that is
+  (a sub-class of) `mlact:ActivityOutput`. `mlact:ActivityInput` is a `geo:SpatialObject`, which
+  also satisfies the geoprocessing profile's spatial-data requirement. `mlact:ActivityOutput` is
+  not, because an output such as a scene classification is only a label vector.
 
 Nothing here modifies the MLM ontology or the base Registered Item Model — it only adds new classes
 and properties on top of both, which is what makes it a profile rather than a fork of either.

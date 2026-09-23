@@ -7,7 +7,7 @@
   "status": "under-development",
   "version": "0.1",
   "itemClass": "model",
-  "group": "Registered Item Model",
+  "group": "Core Model",
   "dependsOn": [
     "ogc.model.cross-domain.prov"
   ],

@@ -4,6 +4,8 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
 # Additive profile shapes: an mlact:MLActivity is still a rim:RegisterAction
 # (the base shapes.shacl continues to apply — sh:targetClass follows
@@ -87,4 +89,47 @@ mlact:ActivityOutputShape a sh:NodeShape ;
         sh:path mlact:structure ;
         sh:class mlm:ResultStructure ;
         sh:maxCount 1 ;
+    ] .
+
+# Activity-type-level shapes. The Geoprocessing Activity Profile's shapes
+# still apply to registered ML activity types (mlact:MLActivity is a
+# geoproc:GeoprocessingActivity); these narrow the related PROV object
+# types further. Sub-classes that are not registered as
+# acttype:ActivityType are skipped by the sh:not branch.
+
+# A registered ML activity type uses at least one mlact:ActivityInput type.
+mlact:MLActivityTypeShape a sh:NodeShape ;
+    sh:property [
+        sh:path acttype:usedEntityType ;
+        sh:qualifiedValueShape [
+            sh:property [ sh:path [ sh:zeroOrMorePath rdfs:subClassOf ] ; sh:hasValue mlact:ActivityInput ]
+        ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "An ML activity type must declare at least one acttype:usedEntityType that is mlact:ActivityInput or a sub-class of it." ;
+    ] .
+
+# A registered inference activity type also generates at least one
+# mlact:ActivityOutput type.
+mlact:InferenceActivityTypeShape a sh:NodeShape ;
+    sh:property [
+        sh:path acttype:generatedEntityType ;
+        sh:qualifiedValueShape [
+            sh:property [ sh:path [ sh:zeroOrMorePath rdfs:subClassOf ] ; sh:hasValue mlact:ActivityOutput ]
+        ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "An inference activity type must declare at least one acttype:generatedEntityType that is mlact:ActivityOutput or a sub-class of it." ;
+    ] .
+
+mlact:MLActivityTypesShape a sh:NodeShape ;
+    sh:targetNode mlact:MLActivity ;
+    sh:property [
+        sh:path [ sh:zeroOrMorePath [ sh:inversePath rdfs:subClassOf ] ] ;
+        sh:node [ sh:or ( [ sh:not [ sh:class acttype:ActivityType ] ] mlact:MLActivityTypeShape ) ] ;
+    ] .
+
+mlact:InferenceActivityTypesShape a sh:NodeShape ;
+    sh:targetNode mlact:InferenceActivity ;
+    sh:property [
+        sh:path [ sh:zeroOrMorePath [ sh:inversePath rdfs:subClassOf ] ] ;
+        sh:node [ sh:or ( [ sh:not [ sh:class acttype:ActivityType ] ] mlact:InferenceActivityTypeShape ) ] ;
     ] .

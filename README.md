@@ -29,9 +29,19 @@ design analysis this repository is grounded in.
 
 ## Profiles
 
-[`_sources/ml-activity-profile`](_sources/ml-activity-profile) is a first worked profile: it
-specialises `rim:RegisterAction` to describe machine learning training/inference runs, built on the
-STAC Machine Learning Model (MLM) extension's ontology. Profile blocks share
+The profiles form one chain, each a profile of the one above it:
+
+- [`_sources/activity-type`](_sources/activity-type): registers of `prov:Activity` types. Each
+  register item is a class that specialises `prov:Activity`. It declares the types of entity,
+  agent and activity it relates to, and may point to a `prov:Plan` of required steps.
+- [`_sources/geoprocessing-activity`](_sources/geoprocessing-activity): adds
+  `geoproc:GeoprocessingActivity` and requires each registered sub-type to use or generate at least
+  one GeoSPARQL spatial data type.
+- [`_sources/ml-activity-profile`](_sources/ml-activity-profile): machine learning
+  training/inference runs, built on the STAC Machine Learning Model (MLM) extension's ontology.
+  `mlact:MLActivity` is both a `geoproc:GeoprocessingActivity` and a `rim:RegisterAction`.
+
+Profile blocks share
 `"group": "Registered Item Model"` in their `bblock.json` so the viewer groups them together.
 
 ## Where this could live

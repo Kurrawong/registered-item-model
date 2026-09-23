@@ -1,5 +1,7 @@
 @prefix mlact: <https://w3id.org/ogc/rim/ml-activity/> .
 @prefix rim:   <https://w3id.org/ogc/rim/> .
+@prefix geoproc: <https://w3id.org/ogc/rim/geoprocessing/> .
+@prefix geo:   <http://www.opengis.net/ont/geosparql#> .
 @prefix mlm:   <https://w3id.org/ogc/stac/mlm/> .
 @prefix stac:  <https://w3id.org/ogc/stac/core/> .
 @prefix prov:  <http://www.w3.org/ns/prov#> .
@@ -12,8 +14,9 @@
 #################################################################
 # Ontology Metadata
 #
-# A profile of the Registered Item Model (rim:) base ontology, adding a
-# specific sub-type of rim:RegisterAction / prov:Activity for recording
+# A profile of the Geoprocessing Activity Profile (geoproc:), and through
+# it of the Registered Item Model (rim:), adding a specific sub-type of
+# geoproc:GeoprocessingActivity and rim:RegisterAction for recording
 # machine learning model training and inference runs. The activity's
 # model, task, framework/accelerator and typed inputs/outputs are all
 # described using terms from the STAC Machine Learning Model (MLM)
@@ -22,9 +25,9 @@
 #################################################################
 
 mlact: a owl:Ontology ;
-    owl:imports rim: , mlm: ;
+    owl:imports rim: , geoproc: , mlm: ;
     dct:title "ML Activity Profile" ;
-    dct:description "A profile of the Registered Item Model, describing machine learning model training and inference runs as typed sub-classes of rim:RegisterAction / prov:Activity, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary." ;
+    dct:description "A profile of the Geoprocessing Activity Profile (and so of the Registered Item Model), describing machine learning model training and inference runs as sub-classes of geoproc:GeoprocessingActivity and rim:RegisterAction, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary." ;
     dct:creator "Rob Atkinson, OGC" ;
     dct:license <https://creativecommons.org/publicdomain/zero/1.0/> .
 
@@ -36,10 +39,15 @@ mlact: a owl:Ontology ;
 # classes add that: an actual, recorded execution, which is exactly what
 # rim:RegisterAction already exists to capture (who/what did this, when,
 # under what justification) — here specialised to machine learning runs.
+#
+# MLM models consume spatiotemporal assets, so an ML activity is also a
+# geoproc:GeoprocessingActivity: its classes (and any narrower ones a
+# register defines) can be registered as activity types in a
+# geoprocessing activity type register.
 #################################################################
 
 mlact:MLActivity a owl:Class ;
-    rdfs:subClassOf rim:RegisterAction ;
+    rdfs:subClassOf geoproc:GeoprocessingActivity , rim:RegisterAction ;
     rdfs:isDefinedBy mlact: ;
     rdfs:label "ML activity" ;
     rdfs:comment "A recorded activity that trains or runs a machine learning model. The model itself is described elsewhere as a STAC Item/Collection per the MLM extension; this class records one execution against it." .
@@ -110,10 +118,10 @@ mlact:accelerator a owl:DatatypeProperty ;
 #################################################################
 
 mlact:ActivityInput a owl:Class ;
-    rdfs:subClassOf prov:Entity ;
+    rdfs:subClassOf prov:Entity , geo:SpatialObject ;
     rdfs:isDefinedBy mlact: ;
     rdfs:label "Activity input" ;
-    rdfs:comment "A data entity consumed as input by one ML activity — for example the actual raster chip or tensor supplied to the model at run time." .
+    rdfs:comment "A data entity consumed as input by one ML activity — for example the actual raster chip or tensor supplied to the model at run time. MLM model inputs are bands or variables of spatiotemporal assets, so an activity input is a geo:SpatialObject (it has a spatial extent). Outputs are not, since a scene classification, for example, is only a label vector." .
 
 mlact:ActivityOutput a owl:Class ;
     rdfs:subClassOf prov:Entity ;
