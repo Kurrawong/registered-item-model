@@ -1,4 +1,6 @@
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix geoproc: <https://w3id.org/ogc/rim/geoprocessing/> .
 @prefix mlact: <https://w3id.org/ogc/rim/ml-activity/> .
 @prefix mlm: <https://w3id.org/ogc/stac/mlm/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -77,9 +79,10 @@ mlact:structure a owl:ObjectProperty ;
 
 mlact:ActivityInput a owl:Class ;
     rdfs:label "Activity input" ;
-    rdfs:comment "A data entity consumed as input by one ML activity — for example the actual raster chip or tensor supplied to the model at run time." ;
+    rdfs:comment "A data entity consumed as input by one ML activity — for example the actual raster chip or tensor supplied to the model at run time. MLM model inputs are bands or variables of spatiotemporal assets, so an activity input is a geo:SpatialObject (it has a spatial extent). Outputs are not, since a scene classification, for example, is only a label vector." ;
     rdfs:isDefinedBy mlact: ;
-    rdfs:subClassOf prov:Entity .
+    rdfs:subClassOf geo:SpatialObject,
+        prov:Entity .
 
 mlact:ActivityOutput a owl:Class ;
     rdfs:label "Activity output" ;
@@ -91,13 +94,15 @@ mlact:MLActivity a owl:Class ;
     rdfs:label "ML activity" ;
     rdfs:comment "A recorded activity that trains or runs a machine learning model. The model itself is described elsewhere as a STAC Item/Collection per the MLM extension; this class records one execution against it." ;
     rdfs:isDefinedBy mlact: ;
-    rdfs:subClassOf rim:RegisterAction .
+    rdfs:subClassOf rim:RegisterAction,
+        geoproc:GeoprocessingActivity .
 
 mlact: a owl:Ontology ;
     dct:creator "Rob Atkinson, OGC" ;
-    dct:description "A profile of the Registered Item Model, describing machine learning model training and inference runs as typed sub-classes of rim:RegisterAction / prov:Activity, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary." ;
+    dct:description "A profile of the Geoprocessing Activity Profile (and so of the Registered Item Model), describing machine learning model training and inference runs as sub-classes of geoproc:GeoprocessingActivity and rim:RegisterAction, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary." ;
     dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
     dct:title "ML Activity Profile" ;
     owl:imports rim:,
+        geoproc:,
         mlm: .
 

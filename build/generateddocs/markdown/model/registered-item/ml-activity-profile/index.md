@@ -3,7 +3,7 @@
 
 `ogc.model.registered-item.ml-activity-profile` *v0.1*
 
-A profile of the Registered Item Model describing machine learning training and inference runs as typed register actions, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary.
+A profile of the Geoprocessing Activity Profile describing machine learning training and inference runs, and registrable ML activity types, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -76,6 +76,62 @@ ex:predictedItem a rim:RegisterItem ;
 
 ex:derivedProductItemClass a rim:RegisterItemClass ;
     dct:title "Derived ML product" .
+
+```
+
+
+### Registering an ML inference activity type
+A geoprocessing activity type register holds "land cover segmentation", a narrower type of
+`mlact:InferenceActivity`. Through `mlact:MLActivity` it is also a
+`geoproc:GeoprocessingActivity`, so three profiles' shapes apply. The activity type profile
+requires the item class and the `prov:Activity` ancestry. The geoprocessing profile requires
+a spatial used or generated entity type, met here because `mlact:ActivityInput` is a
+`geo:SpatialObject`. This profile requires an `mlact:ActivityInput` used type and, for
+inference, an `mlact:ActivityOutput` generated type. The plan gives the steps every run of
+this type follows. Individual runs, like the one in the previous example, are then typed
+`ex:LandCoverSegmentation`.
+
+#### turtle
+```turtle
+ex:mlActivityTypeRegister a rim:Register ;
+    dct:title "EO Machine Learning Activity Types" .
+
+ex:LandCoverSegmentation a acttype:ActivityType , owl:Class ;
+    rdfs:subClassOf mlact:InferenceActivity ;
+    rdfs:label "Land cover segmentation" ;
+    dct:title "Land cover segmentation" ;
+    dct:description "Runs a semantic segmentation model over a multispectral scene to produce a per-pixel land cover mask." ;
+    rim:inRegister ex:mlActivityTypeRegister ;
+    rim:itemClass acttype:activityTypeItemClass ;
+    rim:objectIdentifier "https://example.org/registers/ml-activities/types/land-cover-segmentation/v1"^^xsd:anyURI ;
+    rim:validityStatus rim:valid ;
+    rim:publicationStatus rim:published ;
+    acttype:usedEntityType mlact:ActivityInput ;
+    acttype:generatedEntityType mlact:ActivityOutput ;
+    acttype:associatedAgentType prov:SoftwareAgent ;
+    acttype:plan ex:landCoverSegmentationPlan .
+
+ex:landCoverSegmentationPlan a prov:Plan , p-plan:Plan ;
+    dct:title "Land cover segmentation procedure" .
+
+ex:tileScene a p-plan:Step ;
+    p-plan:isStepOfPlan ex:landCoverSegmentationPlan ;
+    dct:description "Tile the scene into chips matching the model's declared input shape." .
+
+ex:normalizeBands a p-plan:Step ;
+    p-plan:isStepOfPlan ex:landCoverSegmentationPlan ;
+    p-plan:isPrecededBy ex:tileScene ;
+    dct:description "Apply the model's declared value scaling to each band." .
+
+ex:runModel a p-plan:Step ;
+    p-plan:isStepOfPlan ex:landCoverSegmentationPlan ;
+    p-plan:isPrecededBy ex:normalizeBands ;
+    dct:description "Run the model over each chip." .
+
+ex:mosaicMask a p-plan:Step ;
+    p-plan:isStepOfPlan ex:landCoverSegmentationPlan ;
+    p-plan:isPrecededBy ex:runModel ;
+    dct:description "Take the per-pixel argmax and mosaic the chips back into a scene-sized mask." .
 
 ```
 

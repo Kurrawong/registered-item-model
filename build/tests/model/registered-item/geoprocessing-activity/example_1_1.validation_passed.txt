@@ -1,71 +1,34 @@
-Validation report for ogc.model.registered-item.ml-activity-profile - ML Activity Profile
-Generated 2026-09-23T04:01:57.793538+00:00
+Validation report for ogc.model.registered-item.geoprocessing-activity - Geoprocessing Activity Profile
+Generated 2026-09-23T04:01:55.567416+00:00
 === Files ===
 Using example_1_1.ttl from examples
 Output Turtle example_1_1.ttl created
 === End Files ===
 
 === Turtle ===
-Prefixes are defined for mlact, rim, mlm, stac, prov, dct, xsd, acttype, geoproc, p-plan, rdfs, owl, ex
+Prefixes are defined for geoproc, acttype, rim, prov, p-plan, geo, dct, rdfs, owl, xsd, ex
 === End Turtle ===
 
 === SHACL ===
-Error processing closure source skos.ttl: [Errno 2] No such file or directory: '/github/skos.ttl' - SHACL validation will run against an incomplete closure graph
 Using SHACL closure graph sources (declared closures, ontologies and RDF data resources):
- - /github/workspace/_sources/ml-activity-profile/ontology.ttl
- - https://ogcincubator.github.io/bblocks-stac/build/annotated/contrib/stac/extensions/mlm-ontology/ontology.ttl
  - https://www.w3.org/ns/prov-o
  - /github/workspace/_sources/activity-type/ontology.ttl
+ - https://defs.opengis.net/prez-backend/object?uri=http://www.opengis.net/ont/geosparql&_mediatype=text/turtle
  - /github/workspace/_sources/geoprocessing-activity/ontology.ttl
  - /github/workspace/_sources/core-ontology/ontology.ttl
- - https://defs.opengis.net/prez-backend/object?uri=http://www.opengis.net/ont/geosparql&_mediatype=text/turtle
-Validation result for _sources/ml-activity-profile/shapes.shacl:
-  Validation Report
-  Conforms: True
-  
-Focus nodes for _sources/ml-activity-profile/shapes.shacl:
- - Shape mlact:ActivityInputShape: ex:sceneChip
- - Shape mlact:ActivityOutputShape: ex:predictedMask
- - Shape mlact:MLActivityShape: *none*
- - Shape mlact:InferenceActivityTypeShape/sh:property/sh:qualifiedValueShape: *none*
- - Shape mlact:InferenceActivityTypesShape/sh:property/sh:node: *none*
- - Shape mlact:InferenceActivityTypeShape: *none*
- - Shape mlact:InferenceActivityTypesShape: mlact:InferenceActivity
- - Shape mlact:MLActivityTypesShape/sh:property/sh:node: *none*
- - Shape mlact:MLActivityTypesShape: mlact:MLActivity
- - Shape _:n874363286af14b03a0b498491d13ec70b47: *none*
- - Shape _:n874363286af14b03a0b498491d13ec70b54: *none*
- - Shape mlact:MLActivityTypeShape/sh:property/sh:qualifiedValueShape: *none*
- - Shape _:n874363286af14b03a0b498491d13ec70b46: *none*
- - Shape mlact:MLActivityTypeShape: *none*
- - Shape _:n874363286af14b03a0b498491d13ec70b55: *none*
-
-Validation result for https://ogcincubator.github.io/bblocks-stac/_sources/extensions/mlm-ontology/shapes.shacl:
-  Validation Report
-  Conforms: True
-  
-Focus nodes for https://ogcincubator.github.io/bblocks-stac/_sources/extensions/mlm-ontology/shapes.shacl:
- - Shape mlm:ModelInputShape: ex:landCoverInputSpec
- - Shape mlm:AcceleratorShape: *none*
- - Shape mlm:InputStructureShape: ex:landCoverInputStructure
- - Shape mlm:ResultStructureShape: ex:landCoverResultStructure
- - Shape mlm:ModelOutputShape: ex:landCoverOutputSpec
- - Shape mlm:ValueScalingShape: *none*
- - Shape mlm:ModelRootShape: ex:landCoverModel
-
 Validation result for _sources/geoprocessing-activity/shapes.shacl:
   Validation Report
   Conforms: True
   
 Focus nodes for _sources/geoprocessing-activity/shapes.shacl:
- - Shape _:nc85e74ae96154a41b0144191625c0d98b21: *none*
  - Shape geoproc:GeoprocessingActivityTypesShape: geoproc:GeoprocessingActivity
  - Shape geoproc:GeoprocessingActivityTypeShape: *none*
  - Shape geoproc:SpatialDataTypeShape/sh:property/sh:qualifiedValueShape: *none*
- - Shape geoproc:SpatialDataTypeShape: *none*
  - Shape geoproc:GeoprocessingActivityTypeShape/sh:or/rdf:first: *none*
+ - Shape _:n716c42d1254b445f892871ac5b7c7541b21: *none*
+ - Shape geoproc:SpatialDataTypeShape: *none*
+ - Shape _:n716c42d1254b445f892871ac5b7c7541b20: *none*
  - Shape geoproc:GeoprocessingActivityTypeShape/sh:or/rdf:rest/rdf:first: *none*
- - Shape _:nc85e74ae96154a41b0144191625c0d98b20: *none*
  - Shape geoproc:GeoprocessingActivityTypesShape/sh:property/sh:node: *none*
 
 Validation result for _sources/activity-type/shapes.shacl:
@@ -73,7 +36,7 @@ Validation result for _sources/activity-type/shapes.shacl:
   Conforms: True
   
 Focus nodes for _sources/activity-type/shapes.shacl:
- - Shape acttype:ActivityTypeShape: *none*
+ - Shape acttype:ActivityTypeShape: ex:NdviComputation
  - Shape acttype:ActivityTypeItemClassShape: acttype:activityTypeItemClass
 
 Validation result for _sources/core-ontology/shapes.shacl:
@@ -81,14 +44,14 @@ Validation result for _sources/core-ontology/shapes.shacl:
   Conforms: True
   
 Focus nodes for _sources/core-ontology/shapes.shacl:
- - Shape rim:RegisterItemShape: ex:predictedItem
- - Shape rim:RegisterItemClassShape: ex:derivedProductItemClass
+ - Shape rim:RegisterItemShape: *none*
+ - Shape rim:RegisterItemClassShape: *none*
  - Shape rim:RegisterSpecificationShape: *none*
  - Shape rim:ConceptVersionShape: *none*
- - Shape rim:RegisterShape: *none*
+ - Shape rim:TextShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape rim:RegisterShape: ex:eoProcessingRegister
  - Shape rim:ConceptShape: *none*
  - Shape rim:TextShape: *none*
- - Shape rim:TextShape/sh:or/rdf:rest/rdf:first: *none*
  - Shape rim:TextShape/sh:or/rdf:first: *none*
  - Shape rim:RegisterActionShape: *none*
  - Shape rim:CommitmentShape: *none*
@@ -101,7 +64,7 @@ Focus nodes for https://ogcincubator.github.io/cross-domain-model/_sources/prov/
  - Shape <https://www.ogc.org/rules/prov/#Invalidation-shape>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedAttribution>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-wasEndedBy>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Plan-shape>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#Plan-shape>: ex:ndviPlan
  - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedRevision>: *none*
  - Shape <https://www.ogc.org/rules/prov/#InstantaneousEvent-shape>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedCommunication>: *none*

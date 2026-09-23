@@ -1,8 +1,8 @@
 Validation report for ogc.model.registered-item.ml-activity-profile - ML Activity Profile
-Generated 2026-09-23T04:01:57.793538+00:00
+Generated 2026-09-23T04:01:58.513580+00:00
 === Files ===
-Using example_1_1.ttl from examples
-Output Turtle example_1_1.ttl created
+Using example_2_1.ttl from examples
+Output Turtle example_2_1.ttl created
 === End Files ===
 
 === Turtle ===
@@ -24,8 +24,8 @@ Validation result for _sources/ml-activity-profile/shapes.shacl:
   Conforms: True
   
 Focus nodes for _sources/ml-activity-profile/shapes.shacl:
- - Shape mlact:ActivityInputShape: ex:sceneChip
- - Shape mlact:ActivityOutputShape: ex:predictedMask
+ - Shape mlact:ActivityInputShape: *none*
+ - Shape mlact:ActivityOutputShape: *none*
  - Shape mlact:MLActivityShape: *none*
  - Shape mlact:InferenceActivityTypeShape/sh:property/sh:qualifiedValueShape: *none*
  - Shape mlact:InferenceActivityTypesShape/sh:property/sh:node: *none*
@@ -45,13 +45,13 @@ Validation result for https://ogcincubator.github.io/bblocks-stac/_sources/exten
   Conforms: True
   
 Focus nodes for https://ogcincubator.github.io/bblocks-stac/_sources/extensions/mlm-ontology/shapes.shacl:
- - Shape mlm:ModelInputShape: ex:landCoverInputSpec
+ - Shape mlm:ModelInputShape: *none*
  - Shape mlm:AcceleratorShape: *none*
- - Shape mlm:InputStructureShape: ex:landCoverInputStructure
- - Shape mlm:ResultStructureShape: ex:landCoverResultStructure
- - Shape mlm:ModelOutputShape: ex:landCoverOutputSpec
+ - Shape mlm:InputStructureShape: *none*
+ - Shape mlm:ResultStructureShape: *none*
+ - Shape mlm:ModelOutputShape: *none*
  - Shape mlm:ValueScalingShape: *none*
- - Shape mlm:ModelRootShape: ex:landCoverModel
+ - Shape mlm:ModelRootShape: *none*
 
 Validation result for _sources/geoprocessing-activity/shapes.shacl:
   Validation Report
@@ -73,7 +73,7 @@ Validation result for _sources/activity-type/shapes.shacl:
   Conforms: True
   
 Focus nodes for _sources/activity-type/shapes.shacl:
- - Shape acttype:ActivityTypeShape: *none*
+ - Shape acttype:ActivityTypeShape: ex:LandCoverSegmentation
  - Shape acttype:ActivityTypeItemClassShape: acttype:activityTypeItemClass
 
 Validation result for _sources/core-ontology/shapes.shacl:
@@ -81,11 +81,11 @@ Validation result for _sources/core-ontology/shapes.shacl:
   Conforms: True
   
 Focus nodes for _sources/core-ontology/shapes.shacl:
- - Shape rim:RegisterItemShape: ex:predictedItem
- - Shape rim:RegisterItemClassShape: ex:derivedProductItemClass
+ - Shape rim:RegisterItemShape: *none*
+ - Shape rim:RegisterItemClassShape: *none*
  - Shape rim:RegisterSpecificationShape: *none*
  - Shape rim:ConceptVersionShape: *none*
- - Shape rim:RegisterShape: *none*
+ - Shape rim:RegisterShape: ex:mlActivityTypeRegister
  - Shape rim:ConceptShape: *none*
  - Shape rim:TextShape: *none*
  - Shape rim:TextShape/sh:or/rdf:rest/rdf:first: *none*
@@ -101,7 +101,7 @@ Focus nodes for https://ogcincubator.github.io/cross-domain-model/_sources/prov/
  - Shape <https://www.ogc.org/rules/prov/#Invalidation-shape>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedAttribution>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-wasEndedBy>: *none*
- - Shape <https://www.ogc.org/rules/prov/#Plan-shape>: *none*
+ - Shape <https://www.ogc.org/rules/prov/#Plan-shape>: ex:landCoverSegmentationPlan
  - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedRevision>: *none*
  - Shape <https://www.ogc.org/rules/prov/#InstantaneousEvent-shape>: *none*
  - Shape <https://www.ogc.org/rules/prov/#prop-qualifiedCommunication>: *none*

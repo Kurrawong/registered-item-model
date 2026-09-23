@@ -3,15 +3,16 @@
 {
   "itemIdentifier": "ogc.model.registered-item.ml-activity-profile",
   "name": "ML Activity Profile",
+  "group": "Example: Activity Types",
+  "highlighted": true,
   "title": "Machine learning training/inference activities, profiled from the Registered Item Model",
-  "abstract": "A profile of the Registered Item Model describing machine learning training and inference runs as typed register actions, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary.",
-  "description": "The STAC Machine Learning Model (MLM) extension describes a model as a static artifact \u2014 a STAC Item or Collection with declared inputs, outputs and requirements \u2014 but has no notion of a particular run of that model. This block adds that: mlact:MLActivity (with mlact:TrainingActivity and mlact:InferenceActivity sub-types) is a rim:RegisterAction, and so a prov:Activity, recording one execution. In this ecosystem, running a model is itself a governed act \u2014 typically the one that adds a derived product to a register as a new rim:RegisterItem \u2014 so the run belongs in the same audit trail as any other register action. The activity's task, framework and accelerator are drawn from the MLM extension's own SKOS schemes rather than redefined, and its recorded inputs/outputs (mlact:ActivityInput / mlact:ActivityOutput, both prov:Entity) each declare via dct:conformsTo which of the model's own declared mlm:ModelInput/mlm:ModelOutput specifications they realise.",
+  "abstract": "A profile of the Geoprocessing Activity Profile describing machine learning training and inference runs, and registrable ML activity types, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary.",
+  "description": "The STAC Machine Learning Model (MLM) extension describes a model as a static artifact \u2014 a STAC Item or Collection with declared inputs, outputs and requirements \u2014 but has no notion of a particular run of that model. This block adds that: mlact:MLActivity (with mlact:TrainingActivity and mlact:InferenceActivity sub-types) is a geoproc:GeoprocessingActivity recording one execution, and so can be specialised into ML activity types held in an activity type register. It is also a rim:RegisterAction. In this ecosystem, running a model is itself a governed act \u2014 typically the one that adds a derived product to a register as a new rim:RegisterItem \u2014 so the run belongs in the same audit trail as any other register action. The activity's task, framework and accelerator are drawn from the MLM extension's own SKOS schemes rather than redefined, and its recorded inputs/outputs (mlact:ActivityInput / mlact:ActivityOutput, both prov:Entity) each declare via dct:conformsTo which of the model's own declared mlm:ModelInput/mlm:ModelOutput specifications they realise. Registered ML activity types must declare at least one mlact:ActivityInput sub-type as a used entity type, and registered inference types at least one mlact:ActivityOutput sub-type as a generated entity type.",
   "status": "under-development",
   "version": "0.1",
   "itemClass": "model",
-  "group": "Registered Item Model",
   "isProfileOf": [
-    "ogc.model.registered-item.core-ontology"
+    "ogc.model.registered-item.geoprocessing-activity"
   ],
   "dependsOn": [
     "ogc.contrib.stac.extensions.mlm-ontology"
@@ -25,6 +26,12 @@
     ],
     "ogc.contrib.stac.extensions.mlm-ontology": [
       "https://ogcincubator.github.io/bblocks-stac/_sources/extensions/mlm-ontology/shapes.shacl"
+    ],
+    "ogc.model.registered-item.geoprocessing-activity": [
+      "https://ogcincubator.github.io/registered-item-model/_sources/geoprocessing-activity/shapes.shacl"
+    ],
+    "ogc.model.registered-item.activity-type": [
+      "https://ogcincubator.github.io/registered-item-model/_sources/activity-type/shapes.shacl"
     ],
     "ogc.model.registered-item.core-ontology": [
       "https://ogcincubator.github.io/registered-item-model/_sources/core-ontology/shapes.shacl"
@@ -51,10 +58,11 @@
     "machine learning",
     "provenance",
     "MLM",
-    "register"
+    "register",
+    "activity type"
   ],
   "dateTimeAddition": "2026-09-17T00:00:00Z",
-  "dateOfLastChange": "2026-09-17",
+  "dateOfLastChange": "2026-09-23",
   "ontology": "https://ogcincubator.github.io/registered-item-model/build/annotated/model/registered-item/ml-activity-profile/ontology.ttl",
   "sourceFiles": "https://ogcincubator.github.io/registered-item-model/_sources/ml-activity-profile/",
   "validationPassed": true,
@@ -79,6 +87,38 @@
         "prov": "http://www.w3.org/ns/prov#",
         "dct": "http://purl.org/dc/terms/",
         "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "acttype": "https://w3id.org/ogc/rim/activity-type/",
+        "geoproc": "https://w3id.org/ogc/rim/geoprocessing/",
+        "p-plan": "http://purl.org/net/p-plan#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "ex": "https://example.org/registers/ml-activities/"
+      }
+    },
+    {
+      "title": "Registering an ML inference activity type",
+      "content": "A geoprocessing activity type register holds \"land cover segmentation\", a narrower type of\n`mlact:InferenceActivity`. Through `mlact:MLActivity` it is also a\n`geoproc:GeoprocessingActivity`, so three profiles' shapes apply. The activity type profile\nrequires the item class and the `prov:Activity` ancestry. The geoprocessing profile requires\na spatial used or generated entity type, met here because `mlact:ActivityInput` is a\n`geo:SpatialObject`. This profile requires an `mlact:ActivityInput` used type and, for\ninference, an `mlact:ActivityOutput` generated type. The plan gives the steps every run of\nthis type follows. Individual runs, like the one in the previous example, are then typed\n`ex:LandCoverSegmentation`.\n",
+      "snippets": [
+        {
+          "language": "turtle",
+          "url": "https://ogcincubator.github.io/registered-item-model/build/tests/model/registered-item/ml-activity-profile/example_2_1.ttl",
+          "sizeBytes": 1816,
+          "code": "ex:mlActivityTypeRegister a rim:Register ;\n    dct:title \"EO Machine Learning Activity Types\" .\n\nex:LandCoverSegmentation a acttype:ActivityType , owl:Class ;\n    rdfs:subClassOf mlact:InferenceActivity ;\n    rdfs:label \"Land cover segmentation\" ;\n    dct:title \"Land cover segmentation\" ;\n    dct:description \"Runs a semantic segmentation model over a multispectral scene to produce a per-pixel land cover mask.\" ;\n    rim:inRegister ex:mlActivityTypeRegister ;\n    rim:itemClass acttype:activityTypeItemClass ;\n    rim:objectIdentifier \"https://example.org/registers/ml-activities/types/land-cover-segmentation/v1\"^^xsd:anyURI ;\n    rim:validityStatus rim:valid ;\n    rim:publicationStatus rim:published ;\n    acttype:usedEntityType mlact:ActivityInput ;\n    acttype:generatedEntityType mlact:ActivityOutput ;\n    acttype:associatedAgentType prov:SoftwareAgent ;\n    acttype:plan ex:landCoverSegmentationPlan .\n\nex:landCoverSegmentationPlan a prov:Plan , p-plan:Plan ;\n    dct:title \"Land cover segmentation procedure\" .\n\nex:tileScene a p-plan:Step ;\n    p-plan:isStepOfPlan ex:landCoverSegmentationPlan ;\n    dct:description \"Tile the scene into chips matching the model's declared input shape.\" .\n\nex:normalizeBands a p-plan:Step ;\n    p-plan:isStepOfPlan ex:landCoverSegmentationPlan ;\n    p-plan:isPrecededBy ex:tileScene ;\n    dct:description \"Apply the model's declared value scaling to each band.\" .\n\nex:runModel a p-plan:Step ;\n    p-plan:isStepOfPlan ex:landCoverSegmentationPlan ;\n    p-plan:isPrecededBy ex:normalizeBands ;\n    dct:description \"Run the model over each chip.\" .\n\nex:mosaicMask a p-plan:Step ;\n    p-plan:isStepOfPlan ex:landCoverSegmentationPlan ;\n    p-plan:isPrecededBy ex:runModel ;\n    dct:description \"Take the per-pixel argmax and mosaic the chips back into a scene-sized mask.\" .\n"
+        }
+      ],
+      "prefixes": {
+        "mlact": "https://w3id.org/ogc/rim/ml-activity/",
+        "rim": "https://w3id.org/ogc/rim/",
+        "mlm": "https://w3id.org/ogc/stac/mlm/",
+        "stac": "https://w3id.org/ogc/stac/core/",
+        "prov": "http://www.w3.org/ns/prov#",
+        "dct": "http://purl.org/dc/terms/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "acttype": "https://w3id.org/ogc/rim/activity-type/",
+        "geoproc": "https://w3id.org/ogc/rim/geoprocessing/",
+        "p-plan": "http://purl.org/net/p-plan#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "owl": "http://www.w3.org/2002/07/owl#",
         "ex": "https://example.org/registers/ml-activities/"
       }
     }
@@ -91,6 +131,11 @@
     "prov": "http://www.w3.org/ns/prov#",
     "dct": "http://purl.org/dc/terms/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "acttype": "https://w3id.org/ogc/rim/activity-type/",
+    "geoproc": "https://w3id.org/ogc/rim/geoprocessing/",
+    "p-plan": "http://purl.org/net/p-plan#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
     "ex": "https://example.org/registers/ml-activities/"
   },
   "annotatedSchema": null,

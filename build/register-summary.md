@@ -29,15 +29,27 @@ model describes the former, independent of the latter.
 
 ## Building Blocks
 
+### `ogc.model.registered-item.activity-type` — Activity Type Register Profile
+
+**Type:** model
+
+A profile of the Registered Item Model for registers whose items are types of prov:Activity, each able to declare the types of PROV entities, agents and activities it relates to and an optional prov:Plan of required steps.
+
 ### `ogc.model.registered-item.core-ontology` — Registered Item Model
 
 **Type:** model
 
 A base RDF and SHACL model for register items, register item classes and register governance metadata, based on ISO 19135:2026.
 
+### `ogc.model.registered-item.geoprocessing-activity` — Geoprocessing Activity Profile
+
+**Type:** model
+
+A profile of the Activity Type Register Profile for geoprocessing activity types: registered sub-classes of geoproc:GeoprocessingActivity, each required to use or generate at least one GeoSPARQL spatial data type.
+
 ### `ogc.model.registered-item.ml-activity-profile` — ML Activity Profile
 
 **Type:** model
 
-A profile of the Registered Item Model describing machine learning training and inference runs as typed register actions, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary.
+A profile of the Geoprocessing Activity Profile describing machine learning training and inference runs, and registrable ML activity types, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary.
 
