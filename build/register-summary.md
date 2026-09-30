@@ -35,6 +35,24 @@ model describes the former, independent of the latter.
 
 A profile of the Registered Item Model for registers whose items are types of prov:Activity, each able to declare the types of PROV entities, agents and activities it relates to and an optional prov:Plan of required steps.
 
+### `ogc.model.registered-item.rim.concept-version` — Concept Version
+
+**Type:** schema
+
+Modular RDF implementation profile based on ISO/FDIS 19135:2026.
+
+### `ogc.model.registered-item.rim.register` — Register
+
+**Type:** schema
+
+Modular RDF implementation profile based on ISO/FDIS 19135:2026.
+
+### `ogc.model.registered-item.activity-types.prov-activities` — Activity Type Register Profile
+
+**Type:** model
+
+A profile of the Register Item Class for registers whose items are types of prov:Activity, each able to declare the types of PROV entities, agents and activities it relates to and an optional prov:Plan of required steps.
+
 ### `ogc.model.registered-item.core-ontology` — Registered Item Model
 
 **Type:** model
@@ -52,4 +70,28 @@ A profile of the Activity Type Register Profile for geoprocessing activity types
 **Type:** model
 
 A profile of the Geoprocessing Activity Profile describing machine learning training and inference runs, and registrable ML activity types, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary.
+
+### `ogc.model.registered-item.rim.register-item-class` — Register Item Class
+
+**Type:** schema
+
+Modular RDF implementation profile based on ISO/FDIS 19135:2026.
+
+### `ogc.model.registered-item.rim.register-specification` — Register Specification
+
+**Type:** schema
+
+Modular RDF implementation profile based on ISO/FDIS 19135:2026.
+
+### `ogc.model.registered-item.rim.registered-item` — Registered Item
+
+**Type:** schema
+
+Modular RDF implementation profile based on ISO/FDIS 19135:2026.
+
+### `ogc.model.registered-item.rim.register-action` — Register Action
+
+**Type:** schema
+
+Modular RDF implementation profile based on ISO/FDIS 19135:2026.
 

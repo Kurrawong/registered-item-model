@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ISO 19135 Register Item Class",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uri",
+      "x-jsonld-id": "@id"
+    },
+    "type": {
+      "const": "rim:RegisterItemClass",
+      "x-jsonld-id": "@type"
+    }
+  },
+  "required": [
+    "id",
+    "type"
+  ],
+  "additionalProperties": true,
+  "x-jsonld-prefixes": {
+    "rim": "https://w3id.org/ogc/rim/",
+    "dct": "http://purl.org/dc/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "prov": "http://www.w3.org/ns/prov#"
+  }
+}
