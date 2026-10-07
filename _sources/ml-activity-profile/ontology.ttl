@@ -47,7 +47,7 @@ mlact: a owl:Ontology ;
 #################################################################
 
 mlact:MLActivity a owl:Class ;
-    rdfs:subClassOf geoproc:GeoprocessingActivity , rim:RegisterAction ;
+    rdfs:subClassOf geoproc:GeoprocessingActivityType , rim:RegisterAction ;
     rdfs:isDefinedBy mlact: ;
     rdfs:label "ML activity" ;
     rdfs:comment "A recorded activity that trains or runs a machine learning model. The model itself is described elsewhere as a STAC Item/Collection per the MLM extension; this class records one execution against it." .
