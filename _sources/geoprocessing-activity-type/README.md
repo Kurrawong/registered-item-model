@@ -20,5 +20,5 @@ the general pattern.
 
 ## Profiles of this profile
 
-The [ML Activity Types Profile](../ml-activity-profile) specialises `geoproc:GeoprocessingActivity` with
+The [ML Activity Types Profile](../ml-activity-type) specialises `geoproc:GeoprocessingActivity` with
 `mlact:MLActivity` and adds constraints of its own for machine learning activity types.

@@ -9,7 +9,7 @@
   "version": "0.1",
   "itemClass": "model",
   "isProfileOf": [
-    "bblocks://ogc.model.registered-item.geoprocessing-activity"
+    "bblocks://ogc.model.registered-item.geoprocessing-activity-type"
   ],
   "dependsOn": [
     "bblocks://ogc.contrib.stac.extensions.mlm-ontology"
