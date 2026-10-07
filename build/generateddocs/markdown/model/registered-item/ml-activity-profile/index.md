@@ -82,9 +82,9 @@ ex:derivedProductItemClass a rim:RegisterItemClass ;
 
 ### Registering an ML inference activity type
 A geoprocessing activity type register holds "land cover segmentation", a narrower type of
-`mlact:InferenceActivity`. Through `mlact:MLActivity` it is also a
-`geoproc:GeoprocessingActivity`, so three profiles' shapes apply. The activity type profile
-requires the item class and the `prov:Activity` ancestry. The geoprocessing profile requires
+`mlact:InferenceActivityType`. Through `mlact:MLActivityType` it is also a
+`geoproc:GeoprocessingActivityType`, so three profiles' shapes apply. The activity type profile
+requires the item class and the `acttype:ActivityType` ancestry. The geoprocessing profile requires
 a spatial used or generated entity type, met here because `mlact:ActivityInput` is a
 `geo:SpatialObject`. This profile requires an `mlact:ActivityInput` used type and, for
 inference, an `mlact:ActivityOutput` generated type. The plan gives the steps every run of
@@ -97,7 +97,7 @@ ex:mlActivityTypeRegister a rim:Register ;
     dct:title "EO Machine Learning Activity Types" .
 
 ex:LandCoverSegmentation a acttype:ActivityType , owl:Class ;
-    rdfs:subClassOf mlact:InferenceActivity ;
+    rdfs:subClassOf mlact:InferenceActivityType ;
     rdfs:label "Land cover segmentation" ;
     dct:title "Land cover segmentation" ;
     dct:description "Runs a semantic segmentation model over a multispectral scene to produce a per-pixel land cover mask." ;

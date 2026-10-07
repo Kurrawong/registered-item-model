@@ -13,12 +13,12 @@ MLM describes a model as a static artifact: a STAC Item or Collection with decla
 `mlm:framework`, `mlm:accelerator`, and `mlm:input`/`mlm:output` specifications. It has no notion
 of a particular *run* of that model — and the base Registered Item Model already has exactly the
 class for that: `rim:RegisterAction`, a `acttype:ActivityType` recording who or what did something, when,
-and why. This block adds `mlact:MLActivityType` as a sub-class of `rim:RegisterAction`, because in this
+and why. This block adds `mlact:MLActivityType` as a subclass of `rim:RegisterAction`, because in this
 ecosystem running a model is itself a governed act — typically the one that adds a derived product
 to a register as a new `rim:RegisterItem`.
 
-MLM models consume spatiotemporal assets, so `mlact:MLActivityType` is also a sub-class of
-`geoproc:GeoprocessingActivityType`. Its sub-classes, and narrower ones a register defines (for example
+MLM models consume spatiotemporal assets, so `mlact:MLActivityType` is also a subclass of
+`geoproc:GeoprocessingActivityType`. Its subclasses, and narrower ones a register defines (for example
 "land cover segmentation"), can therefore be registered as activity types in a geoprocessing
 activity type register, each with an optional plan of required steps.
 
@@ -36,10 +36,10 @@ activity type register, each with an optional plan of required steps.
   `dct:conformsTo`, and to its actual tensor shape/dtype via `mlact:structure`, reusing MLM's own
   `InputStructure`/`ResultStructure` classes rather than redefining them.
 
-- **Activity type constraints** — a registered sub-class of `mlact:MLActivityType` must declare at
-  least one `acttype:usedEntityType` that is (a sub-class of) `mlact:ActivityInput`. A registered
-  sub-class of `mlact:InferenceActivityType` must also declare an `acttype:generatedEntityType` that is
-  (a sub-class of) `mlact:ActivityOutput`. `mlact:ActivityInput` is a `geo:SpatialObject`, which
+- **Activity type constraints** — a registered subclass of `mlact:MLActivityType` must declare at
+  least one `acttype:usedEntityType` that is (a subclass of) `mlact:ActivityInput`. A registered
+  subclass of `mlact:InferenceActivityType` must also declare an `acttype:generatedEntityType` that is
+  (a subclass of) `mlact:ActivityOutput`. `mlact:ActivityInput` is a `geo:SpatialObject`, which
   also satisfies the geoprocessing profile's spatial-data requirement. `mlact:ActivityOutput` is
   not, because an output such as a scene classification is only a label vector.
 

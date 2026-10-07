@@ -13,21 +13,21 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 mlact:InferenceActivityType a owl:Class ;
-    rdfs:label "Inference activity type" ;
-    rdfs:comment "An activity type that runs a trained model to produce predictions." ;
+    rdfs:label "Inference activity" ;
+    rdfs:comment "An activity that runs a trained model to produce predictions." ;
     rdfs:isDefinedBy mlact: ;
-    rdfs:subClassOf mlact:MLActivity .
+    rdfs:subClassOf mlact:MLActivityType .
 
-mlact:TrainingActivity a owl:Class ;
-    rdfs:label "Training activity type" ;
-    rdfs:comment "An activity type that trains or fine-tunes a model." ;
+mlact:TrainingActivityType a owl:Class ;
+    rdfs:label "Training activity" ;
+    rdfs:comment "An activity that trains or fine-tunes a model." ;
     rdfs:isDefinedBy mlact: ;
-    rdfs:subClassOf mlact:MLActivity .
+    rdfs:subClassOf mlact:MLActivityType .
 
 mlact:accelerator a owl:DatatypeProperty ;
     rdfs:label "runtime accelerator" ;
     rdfs:comment "The hardware accelerator actually used to perform this activity. Values are drawn from mlm:AcceleratorScheme." ;
-    rdfs:domain mlact:MLActivity ;
+    rdfs:domain mlact:MLActivityType ;
     rdfs:isDefinedBy mlact: ;
     rdfs:range skos:Concept ;
     rdfs:subPropertyOf mlm:accelerator .
@@ -35,14 +35,14 @@ mlact:accelerator a owl:DatatypeProperty ;
 mlact:framework a owl:DatatypeProperty ;
     rdfs:label "runtime framework" ;
     rdfs:comment "The ML framework actually used to perform this activity — may differ from the model's own declared mlm:framework, for example when a model is exported to ONNX for inference." ;
-    rdfs:domain mlact:MLActivity ;
+    rdfs:domain mlact:MLActivityType ;
     rdfs:isDefinedBy mlact: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf mlm:framework .
 
 mlact:input a owl:ObjectProperty ;
     rdfs:label "activity input" ;
-    rdfs:domain mlact:MLActivity ;
+    rdfs:domain mlact:MLActivityType ;
     rdfs:isDefinedBy mlact: ;
     rdfs:range mlact:ActivityInput ;
     rdfs:subPropertyOf prov:used .
@@ -50,14 +50,14 @@ mlact:input a owl:ObjectProperty ;
 mlact:model a owl:ObjectProperty ;
     rdfs:label "model" ;
     rdfs:comment "The STAC Item or Collection (describing the model per the MLM extension) that this activity trained or ran." ;
-    rdfs:domain mlact:MLActivity ;
+    rdfs:domain mlact:MLActivityType ;
     rdfs:isDefinedBy mlact: ;
     rdfs:range [ owl:unionOf ( stac:Item stac:Collection ) ] ;
     rdfs:subPropertyOf prov:used .
 
 mlact:output a owl:ObjectProperty ;
     rdfs:label "activity output" ;
-    rdfs:domain mlact:MLActivity ;
+    rdfs:domain mlact:MLActivityType ;
     rdfs:isDefinedBy mlact: ;
     rdfs:range mlact:ActivityOutput ;
     owl:inverseOf prov:wasGeneratedBy .
@@ -65,7 +65,7 @@ mlact:output a owl:ObjectProperty ;
 mlact:performsTask a owl:ObjectProperty ;
     rdfs:label "performs task" ;
     rdfs:comment "The machine learning task type(s) this activity performs. Values are drawn from mlm:TaskScheme — the same scheme the model's own mlm:tasks declares, so an activity's task can be checked against what the model claims to support." ;
-    rdfs:domain mlact:MLActivity ;
+    rdfs:domain mlact:MLActivityType ;
     rdfs:isDefinedBy mlact: ;
     rdfs:range skos:Concept ;
     rdfs:subPropertyOf mlm:tasks .
@@ -91,17 +91,17 @@ mlact:ActivityOutput a owl:Class ;
     rdfs:subClassOf prov:Entity .
 
 mlact:MLActivityType a owl:Class ;
-    rdfs:label "ML activity type" ;
-    rdfs:comment "A recorded activity type that trains or runs a machine learning model. The model itself is described elsewhere as a STAC Item/Collection per the MLM extension; this class records one execution against it." ;
+    rdfs:label "ML activity" ;
+    rdfs:comment "A recorded activity that trains or runs a machine learning model. The model itself is described elsewhere as a STAC Item/Collection per the MLM extension; this class records one execution against it." ;
     rdfs:isDefinedBy mlact: ;
     rdfs:subClassOf rim:RegisterAction,
         geoproc:GeoprocessingActivityType .
 
 mlact: a owl:Ontology ;
     dct:creator "Rob Atkinson, OGC" ;
-    dct:description "A profile of the Geoprocessing Activity Profile (and so of the Registered Item Model), describing machine learning model training and inference runs as sub-classes of geoproc:GeoprocessingActivity and rim:RegisterAction, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary." ;
+    dct:description "A profile of the Geoprocessing Activity Types Profile (and so of the Registered Item Model), describing machine learning model training and inference runs as sub-classes of geoproc:GeoprocessingActivityType and rim:RegisterAction, using the STAC MLM extension's task, framework/accelerator and input/output vocabulary." ;
     dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
-    dct:title "ML Activity Profile" ;
+    dct:title "ML Activity Types Profile" ;
     owl:imports rim:,
         geoproc:,
         mlm: .

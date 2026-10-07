@@ -6,7 +6,7 @@ register item.
 
 ## What it adds
 
-- **`acttype:ActivityType`**: a sub-class of `rim:RegisterItem`. Specific activity type classes
+- **`acttype:ActivityType`**: a subclass of `rim:RegisterItem`. Specific activity type classes
   specialise this root. Registered types can be declared as classes and used to type individual
   activities. Those activities also inherit the register item requirements, so they need their
   own identifiers, statuses and `acttype:activityTypeItemClass`.
@@ -31,7 +31,7 @@ A further profile, such as [Geoprocessing Activity Types](../geoprocessing-activ
 1. declares a root activity class (for example `geoproc:GeoprocessingActivityType rdfs:subClassOf
    acttype:ActivityType`) that its registered types specialise;
 2. constrains the related types that those registered types must declare, with a shape targeting
-   every sub-class of the root that is also a registered `acttype:ActivityType`:
+   every subclass of the root that is also a registered `acttype:ActivityType`:
 
 ```turtle
 ex:MyRootTypesShape a sh:NodeShape ;
@@ -43,10 +43,10 @@ ex:MyRootTypesShape a sh:NodeShape ;
     ] .
 ```
 
-The `sh:not` branch skips sub-classes that are only declared in an ontology and are not being
+The `sh:not` branch skips subclasses that are only declared in an ontology and are not being
 registered. `ex:MyActivityTypeConstraints` then constrains `acttype:usedEntityType`,
 `acttype:generatedEntityType` and similar properties, for example with `sh:qualifiedValueShape`
 over an `rdfs:subClassOf*` path.
 
-Each constraining profile can itself be profiled: a sub-type's shapes add to its parent's and never
+Each constraining profile can itself be profiled: a subtype's shapes add to its parent's and never
 replace them.
