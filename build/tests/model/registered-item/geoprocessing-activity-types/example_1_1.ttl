@@ -15,7 +15,7 @@ ex:NdviComputation a owl:Class,
     rdfs:label "NDVI computation" ;
     dct:description "Computes the Normalized Difference Vegetation Index from the red and near-infrared bands of a multispectral scene." ;
     dct:title "NDVI computation" ;
-    rdfs:subClassOf geoproc:GeoprocessingActivity ;
+    rdfs:subClassOf geoproc:GeoprocessingActivityType ;
     acttype:associatedAgentType prov:SoftwareAgent ;
     acttype:generatedEntityType ex:NdviRaster ;
     acttype:plan ex:ndviPlan ;

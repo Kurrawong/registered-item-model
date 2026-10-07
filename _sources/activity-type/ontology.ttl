@@ -8,28 +8,28 @@
 #################################################################
 # Ontology Metadata
 #
-# A profile of the Registered Item Model (rim:) for registers whose items
-# are types of prov:Activity. Each register item is itself a class — a
-# sub-class of prov:Activity — so the governed thing (the register item,
-# with its identifiers, statuses and actions) and the type that activity
-# instances are declared with (rdf:type) are one and the same resource.
+# A profile of the Registered Item Model for registered activity types.
+# Specific activity type classes specialise acttype:ActivityType. Registered
+# types may themselves be classes used to type governed activity records.
+# Both registered types and those records inherit register item metadata.
 #################################################################
 
 acttype: a owl:Ontology ;
     owl:imports rim: ;
     dct:title "Activity Type Register Profile" ;
-    dct:description "A profile of the Registered Item Model for registers of prov:Activity types. Restricts the register items of such a register to classes that specialise prov:Activity, lets each type declare the types of PROV entities, agents and activities it relates to, and optionally a prov:Plan describing its required steps. Further profiles specialise both the activity types and those related types." ;
+    dct:description "A profile of the Registered Item Model for registers of activity types. Requires activity type records to belong to the acttype:ActivityType hierarchy, lets each type declare the types of PROV entities, agents and activities it relates to, and optionally a prov:Plan describing its required steps. Further profiles specialise both the activity types and those related types." ;
     dct:creator "Rob Atkinson, OGC" ;
     dct:license <https://creativecommons.org/publicdomain/zero/1.0/> .
 
 #################################################################
 # The activity type as a register item
 #
-# acttype:ActivityType is a metaclass: its instances are classes, each a
-# sub-class (directly or indirectly) of prov:Activity (OWL 2 punning).
+# acttype:ActivityType is the root class for registered activity types.
+# More specific activity type classes specialise it; their instances
+# inherit the register item requirements.
 # It narrows the domain of rim:itemClass for this kind of register: every
 # register item carrying acttype:activityTypeItemClass must be an
-# acttype:ActivityType, and so a type of prov:Activity. Both directions
+# acttype:ActivityType, or an instance of a sub-class of it. Both directions
 # are enforced in shapes.shacl.
 #################################################################
 
@@ -37,12 +37,12 @@ acttype:ActivityType a owl:Class ;
     rdfs:subClassOf rim:RegisterItem ;
     rdfs:isDefinedBy acttype: ;
     rdfs:label "Activity type" ;
-    rdfs:comment "A register item that is a type of prov:Activity: a class, declared rdfs:subClassOf prov:Activity (directly or via other registered activity types), whose instances are individual activities. Being a rim:RegisterItem, the type itself carries identifiers, validity and publication status, and a governed change history." .
+    rdfs:comment "A governed activity type record. Specific activity type classes specialise this class, and their instances inherit register item identifiers, validity and publication status, and a governed change history. Registered types may themselves be classes used to type individual activity records." .
 
 acttype:activityTypeItemClass a rim:RegisterItemClass ;
     rdfs:isDefinedBy acttype: ;
     dct:title "Activity type" ;
-    dct:description "The register item class of every item in an activity type register. Items of this class must be acttype:ActivityType instances, i.e. sub-classes of prov:Activity." ;
+    dct:description "The register item class of every item in an activity type register. Items of this class must be acttype:ActivityType instances, directly or through a sub-class." ;
     rim:validatedBy acttype:ActivityTypeShape .
 
 #################################################################
@@ -85,7 +85,7 @@ acttype:associatedAgentType a owl:ObjectProperty ;
 acttype:informedByActivityType a owl:ObjectProperty ;
     rdfs:isDefinedBy acttype: ;
     rdfs:label "informed by activity type" ;
-    rdfs:comment "A type of prov:Activity whose instances typically inform activities of this type (prov:wasInformedBy) — for example an upstream preparation activity type." ;
+    rdfs:comment "A type of acttype:ActivityType whose instances typically inform activities of this type (prov:wasInformedBy) — for example an upstream preparation activity type." ;
     rdfs:seeAlso prov:wasInformedBy ;
     rdfs:domain acttype:ActivityType ;
     rdfs:range owl:Class .

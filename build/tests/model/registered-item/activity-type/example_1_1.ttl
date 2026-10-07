@@ -23,7 +23,7 @@ ex:DatasetQualityReview a owl:Class,
     rdfs:label "Dataset quality review" ;
     dct:description "A review of a dataset against the curation quality criteria, producing a quality report." ;
     dct:title "Dataset quality review" ;
-    rdfs:subClassOf prov:Activity ;
+    rdfs:subClassOf acttype:ActivityType ;
     acttype:associatedAgentType prov:Person ;
     acttype:generatedEntityType ex:QualityReport ;
     acttype:plan ex:qualityReviewPlan ;
@@ -52,7 +52,11 @@ ex:review-2026-09-20 a ex:DatasetQualityReview ;
             prov:hadPlan ex:qualityReviewPlan ] ;
     prov:startedAtTime "2026-09-20T09:00:00+00:00"^^xsd:dateTime ;
     prov:used ex:riverGaugesDataset ;
-    prov:wasAssociatedWith ex:curatorJo .
+    prov:wasAssociatedWith ex:curatorJo ;
+    rim:itemClass acttype:activityTypeItemClass ;
+    rim:objectIdentifier "https://example.org/registers/activity-types/reviews/review-2026-09-20"^^xsd:anyURI ;
+    rim:publicationStatus rim:published ;
+    rim:validityStatus rim:valid .
 
 ex:riverGaugesDataset a dcat:Dataset,
         prov:Entity .

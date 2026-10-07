@@ -2,6 +2,7 @@
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix rim:     <https://w3id.org/ogc/rim/> .
 @prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 # Constrained profile shapes: an acttype:ActivityType is still a
@@ -10,12 +11,12 @@
 # the register an activity type register, in both directions:
 #
 #   - every acttype:ActivityType uses acttype:activityTypeItemClass as its
-#     rim:itemClass, and is a sub-class of prov:Activity;
+#     rim:itemClass, and belongs to the acttype:ActivityType hierarchy;
 #   - every register item whose rim:itemClass is acttype:activityTypeItemClass
 #     is an acttype:ActivityType (i.e. the domain of rim:itemClass, for this
-#     item class, is narrowed to types of prov:Activity).
+#     item class, is narrowed to types of acttype:ActivityType).
 #
-# The rdfs:subClassOf chain up to prov:Activity must be present in the
+# The rdf:type and rdfs:subClassOf chain to acttype:ActivityType must be present in the
 # data graph (or its ontology closure) — for a type that specialises
 # another registered type, that type's own ontology supplies the rest of
 # the chain.
@@ -28,9 +29,9 @@ acttype:ActivityTypeShape a sh:NodeShape ;
         sh:message "An activity type's rim:itemClass must be acttype:activityTypeItemClass." ;
     ] ;
     sh:property [
-        sh:path [ sh:oneOrMorePath rdfs:subClassOf ] ;
-        sh:hasValue prov:Activity ;
-        sh:message "An activity type must be a sub-class (directly or indirectly) of prov:Activity." ;
+        sh:path ( rdf:type [ sh:zeroOrMorePath rdfs:subClassOf ] ) ;
+        sh:hasValue acttype:ActivityType ;
+        sh:message "An activity type must be typed with acttype:ActivityType or a sub-class of it." ;
     ] ;
     sh:property [ sh:path acttype:usedEntityType ;         sh:nodeKind sh:IRI ] ;
     sh:property [ sh:path acttype:generatedEntityType ;    sh:nodeKind sh:IRI ] ;

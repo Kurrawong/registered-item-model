@@ -15,7 +15,7 @@ examples:
   - title: A registered NDVI computation activity type
     content: |
       An Earth observation processing register governs the geoprocessing activity types its
-      pipelines run. "NDVI computation" specialises `geoproc:GeoprocessingActivity`. It uses a
+      pipelines run. "NDVI computation" specialises `geoproc:GeoprocessingActivityType`. It uses a
       multispectral scene and generates an NDVI raster, both sub-classes of `geo:Feature`, which
       satisfies the profile's requirement for at least one spatial used or generated entity type.
       Its plan lists the three steps every NDVI computation must perform, in order.
@@ -26,7 +26,7 @@ examples:
               dct:title "EO Processing Activity Types" .
 
           ex:NdviComputation a acttype:ActivityType , owl:Class ;
-              rdfs:subClassOf geoproc:GeoprocessingActivity ;
+              rdfs:subClassOf geoproc:GeoprocessingActivityType ;
               rdfs:label "NDVI computation" ;
               dct:title "NDVI computation" ;
               dct:description "Computes the Normalized Difference Vegetation Index from the red and near-infrared bands of a multispectral scene." ;

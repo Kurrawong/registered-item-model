@@ -2,7 +2,7 @@
   "title": "Validation report for ogc.model.registered-item.rim.register-specification - Register Specification",
   "bblockName": "Register Specification",
   "bblockId": "ogc.model.registered-item.rim.register-specification",
-  "generated": "2026-09-30T09:07:41.682606+00:00",
+  "generated": "2026-10-07T07:03:01.917216+00:00",
   "result": true,
   "items": [
     {
@@ -10,7 +10,6 @@
         "type": "EXAMPLE",
         "requireFail": false,
         "filename": "build/tests/model/registered-item/rim/register-specification/example_1_1.ttl",
-        "url": "https://ogcincubator.github.io/registered-item-model/build/tests/model/registered-item/rim/register-specification/example_1_1.ttl",
         "exampleIndex": 1,
         "snippetIndex": 1,
         "language": "text/turtle"

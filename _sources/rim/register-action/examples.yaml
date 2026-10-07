@@ -1,4 +1,8 @@
-- title: Valid ISO 19135 Register Action example
-  snippets:
-    - language: turtle
-      ref: examples/example.ttl
+prefixes:
+  xsd: http://www.w3.org/2001/XMLSchema#
+
+examples:
+  - title: Valid ISO 19135 Register Action example
+    snippets:
+      - language: turtle
+        ref: examples/example.ttl

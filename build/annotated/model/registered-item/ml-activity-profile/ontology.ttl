@@ -12,15 +12,15 @@
 @prefix stac: <https://w3id.org/ogc/stac/core/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-mlact:InferenceActivity a owl:Class ;
-    rdfs:label "Inference activity" ;
-    rdfs:comment "An activity that runs a trained model to produce predictions." ;
+mlact:InferenceActivityType a owl:Class ;
+    rdfs:label "Inference activity type" ;
+    rdfs:comment "An activity type that runs a trained model to produce predictions." ;
     rdfs:isDefinedBy mlact: ;
     rdfs:subClassOf mlact:MLActivity .
 
 mlact:TrainingActivity a owl:Class ;
-    rdfs:label "Training activity" ;
-    rdfs:comment "An activity that trains or fine-tunes a model." ;
+    rdfs:label "Training activity type" ;
+    rdfs:comment "An activity type that trains or fine-tunes a model." ;
     rdfs:isDefinedBy mlact: ;
     rdfs:subClassOf mlact:MLActivity .
 
@@ -90,12 +90,12 @@ mlact:ActivityOutput a owl:Class ;
     rdfs:isDefinedBy mlact: ;
     rdfs:subClassOf prov:Entity .
 
-mlact:MLActivity a owl:Class ;
-    rdfs:label "ML activity" ;
-    rdfs:comment "A recorded activity that trains or runs a machine learning model. The model itself is described elsewhere as a STAC Item/Collection per the MLM extension; this class records one execution against it." ;
+mlact:MLActivityType a owl:Class ;
+    rdfs:label "ML activity type" ;
+    rdfs:comment "A recorded activity type that trains or runs a machine learning model. The model itself is described elsewhere as a STAC Item/Collection per the MLM extension; this class records one execution against it." ;
     rdfs:isDefinedBy mlact: ;
     rdfs:subClassOf rim:RegisterAction,
-        geoproc:GeoprocessingActivity .
+        geoproc:GeoprocessingActivityType .
 
 mlact: a owl:Ontology ;
     dct:creator "Rob Atkinson, OGC" ;

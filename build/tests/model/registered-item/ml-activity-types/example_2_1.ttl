@@ -14,7 +14,7 @@ ex:LandCoverSegmentation a owl:Class,
     rdfs:label "Land cover segmentation" ;
     dct:description "Runs a semantic segmentation model over a multispectral scene to produce a per-pixel land cover mask." ;
     dct:title "Land cover segmentation" ;
-    rdfs:subClassOf mlact:InferenceActivity ;
+    rdfs:subClassOf mlact:InferenceActivityType ;
     acttype:associatedAgentType prov:SoftwareAgent ;
     acttype:generatedEntityType mlact:ActivityOutput ;
     acttype:plan ex:landCoverSegmentationPlan ;

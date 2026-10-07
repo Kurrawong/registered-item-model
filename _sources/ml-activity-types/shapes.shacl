@@ -7,7 +7,7 @@
 @prefix acttype: <https://w3id.org/ogc/rim/activity-type/> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
-# Additive profile shapes: an mlact:MLActivity is still a rim:RegisterAction
+# Additive profile shapes: an mlact:MLActivityType is still a rim:RegisterAction
 # (the base shapes.shacl continues to apply — sh:targetClass follows
 # rdfs:subClassOf, so rim:RegisterActionShape's constraints, including the
 # required rim:actionType, also fire on these nodes). These shapes add the
@@ -15,7 +15,7 @@
 # list, and at least one typed input and output.
 
 mlact:MLActivityShape a sh:NodeShape ;
-    sh:targetClass mlact:MLActivity ;
+    sh:targetClass mlact:MLActivityType ;
     sh:property [
         sh:path mlact:model ;
         sh:minCount 1 ;
@@ -92,8 +92,8 @@ mlact:ActivityOutputShape a sh:NodeShape ;
     ] .
 
 # Activity-type-level shapes. The Geoprocessing Activity Types Profile's shapes
-# still apply to registered ML activity types (mlact:MLActivity is a
-# geoproc:GeoprocessingActivity); these narrow the related PROV object
+# still apply to registered ML activity types (mlact:MLActivityType is a
+# geoproc:GeoprocessingActivityType); these narrow the related PROV object
 # types further. Sub-classes that are not registered as
 # acttype:ActivityType are skipped by the sh:not branch.
 
@@ -121,14 +121,14 @@ mlact:InferenceActivityTypeShape a sh:NodeShape ;
     ] .
 
 mlact:MLActivityTypesShape a sh:NodeShape ;
-    sh:targetNode mlact:MLActivity ;
+    sh:targetNode mlact:MLActivityType ;
     sh:property [
         sh:path [ sh:zeroOrMorePath [ sh:inversePath rdfs:subClassOf ] ] ;
         sh:node [ sh:or ( [ sh:not [ sh:class acttype:ActivityType ] ] mlact:MLActivityTypeShape ) ] ;
     ] .
 
 mlact:InferenceActivityTypesShape a sh:NodeShape ;
-    sh:targetNode mlact:InferenceActivity ;
+    sh:targetNode mlact:InferenceActivityType ;
     sh:property [
         sh:path [ sh:zeroOrMorePath [ sh:inversePath rdfs:subClassOf ] ] ;
         sh:node [ sh:or ( [ sh:not [ sh:class acttype:ActivityType ] ] mlact:InferenceActivityTypeShape ) ] ;

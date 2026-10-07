@@ -3,7 +3,7 @@
 
 `ogc.model.registered-item.activity-type` *v0.1*
 
-A profile of the Registered Item Model for registers whose items are types of prov:Activity, each able to declare the types of PROV entities, agents and activities it relates to and an optional prov:Plan of required steps.
+A profile of the Registered Item Model for governed activity type records in the acttype:ActivityType hierarchy, with related PROV object types and an optional plan.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -12,7 +12,7 @@ A profile of the Registered Item Model for registers whose items are types of pr
 ### A registered activity type with a plan, and an activity of that type
 A data curation register governs the kinds of activity its curators perform. The
 "dataset quality review" type is a register item — with its own identifier, status and
-item class — and also a class, a sub-class of `prov:Activity`. It declares the kinds of
+item class — and also a class, a sub-class of `acttype:ActivityType`. It declares the kinds of
 entity it uses and generates and the kind of agent that performs it, and points to a
 P-Plan `prov:Plan` listing its three required steps in order. The last part shows an
 individual review typed directly with the registered class, recording the plan it followed
@@ -24,7 +24,7 @@ ex:curationRegister a rim:Register ;
     dct:title "Data Curation Activity Types" .
 
 ex:DatasetQualityReview a acttype:ActivityType , owl:Class ;
-    rdfs:subClassOf prov:Activity ;
+    rdfs:subClassOf acttype:ActivityType ;
     rdfs:label "Dataset quality review" ;
     dct:title "Dataset quality review" ;
     dct:description "A review of a dataset against the curation quality criteria, producing a quality report." ;
@@ -60,6 +60,10 @@ ex:writeReport a p-plan:Step ;
 
 # An individual activity of the registered type.
 ex:review-2026-09-20 a ex:DatasetQualityReview ;
+    rim:itemClass acttype:activityTypeItemClass ;
+    rim:objectIdentifier "https://example.org/registers/activity-types/reviews/review-2026-09-20"^^xsd:anyURI ;
+    rim:validityStatus rim:valid ;
+    rim:publicationStatus rim:published ;
     prov:used ex:riverGaugesDataset ;
     prov:wasAssociatedWith ex:curatorJo ;
     prov:qualifiedAssociation [
@@ -86,6 +90,6 @@ ex:report-2026-09-20 a ex:QualityReport , prov:Entity ;
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/ogcincubator/registered-item-model](https://github.com/ogcincubator/registered-item-model)
+* URL: [https://github.com/Kurrawong/registered-item-model](https://github.com/Kurrawong/registered-item-model)
 * Path: `_sources/activity-type`
 

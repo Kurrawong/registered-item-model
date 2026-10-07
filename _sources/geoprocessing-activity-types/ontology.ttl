@@ -17,7 +17,7 @@
 geoproc: a owl:Ontology ;
     owl:imports acttype: ;
     dct:title "Geoprocessing Activity Types Profile" ;
-    dct:description "A profile of the Activity Type Register Profile for geoprocessing activity types: types of prov:Activity that use or generate spatial data, where spatial data is anything typed with a GeoSPARQL spatial object or spatial object collection class." ;
+    dct:description "A profile of the Activity Type Register Profile for geoprocessing activity types: types of acttype:ActivityType that use or generate spatial data, where spatial data is anything typed with a GeoSPARQL spatial object or spatial object collection class." ;
     dct:creator "Rob Atkinson, OGC" ;
     dct:license <https://creativecommons.org/publicdomain/zero/1.0/> .
 

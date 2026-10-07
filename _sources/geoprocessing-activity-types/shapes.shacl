@@ -7,7 +7,7 @@
 # Constrained profile shapes. The Activity Type Register Profile's shapes
 # still apply to every registered type; these add geoprocessing-specific
 # constraints on the related PROV object types that a registered
-# sub-class of geoproc:GeoprocessingActivity must declare.
+# sub-class of geoproc:GeoprocessingActivityType must declare.
 
 # A class is a spatial data type if it is, or specialises, one of the
 # GeoSPARQL spatial classes. The sub-classes of geo:SpatialObject and
@@ -40,11 +40,11 @@ geoproc:GeoprocessingActivityTypeShape a sh:NodeShape ;
     ) ;
     sh:message "A geoprocessing activity type must declare at least one acttype:usedEntityType or acttype:generatedEntityType that is a GeoSPARQL spatial object or spatial object collection type." .
 
-# Applies the constraints to every sub-class of geoproc:GeoprocessingActivity
+# Applies the constraints to every sub-class of geoproc:GeoprocessingActivityType
 # that is registered as an acttype:ActivityType. Sub-classes only declared
 # in an ontology, and not registered, are skipped by the sh:not branch.
 geoproc:GeoprocessingActivityTypesShape a sh:NodeShape ;
-    sh:targetNode geoproc:GeoprocessingActivity ;
+    sh:targetNode geoproc:GeoprocessingActivityType ;
     sh:property [
         sh:path [ sh:oneOrMorePath [ sh:inversePath rdfs:subClassOf ] ] ;
         sh:node [

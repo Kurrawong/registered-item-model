@@ -110,8 +110,8 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://ogcincubator.github.io/registered-item-model/build/annotated/model/registered-item/rim/register-action/schema.json)
-* JSON version: [schema.json](https://ogcincubator.github.io/registered-item-model/build/annotated/model/registered-item/rim/register-action/schema.yaml)
+* YAML version: [schema.yaml](./annotated/model/registered-item/rim/register-action/schema.json)
+* JSON version: [schema.json](./annotated/model/registered-item/rim/register-action/schema.yaml)
 
 
 # JSON-LD Context
@@ -131,13 +131,13 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://ogcincubator.github.io/registered-item-model/build/annotated/model/registered-item/rim/register-action/context.jsonld)
+[context.jsonld](./annotated/model/registered-item/rim/register-action/context.jsonld)
 
 
 # For developers
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/ogcincubator/registered-item-model](https://github.com/ogcincubator/registered-item-model)
+* URL: [https://github.com/Kurrawong/registered-item-model](https://github.com/Kurrawong/registered-item-model)
 * Path: `_sources/rim/register-action`
 

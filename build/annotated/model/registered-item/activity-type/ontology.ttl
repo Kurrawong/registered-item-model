@@ -6,7 +6,7 @@
 @prefix rim: <https://w3id.org/ogc/rim/> .
 
 acttype:activityTypeItemClass a rim:RegisterItemClass ;
-    dct:description "The register item class of every item in an activity type register. Items of this class must be acttype:ActivityType instances, i.e. sub-classes of prov:Activity." ;
+    dct:description "The register item class of every item in an activity type register. Items of this class must be acttype:ActivityType instances, directly or through a sub-class." ;
     dct:title "Activity type" ;
     rdfs:isDefinedBy acttype: ;
     rim:validatedBy acttype:ActivityTypeShape .
@@ -29,7 +29,7 @@ acttype:generatedEntityType a owl:ObjectProperty ;
 
 acttype:informedByActivityType a owl:ObjectProperty ;
     rdfs:label "informed by activity type" ;
-    rdfs:comment "A type of prov:Activity whose instances typically inform activities of this type (prov:wasInformedBy) — for example an upstream preparation activity type." ;
+    rdfs:comment "A type of acttype:ActivityType whose instances typically inform activities of this type (prov:wasInformedBy) — for example an upstream preparation activity type." ;
     rdfs:domain acttype:ActivityType ;
     rdfs:isDefinedBy acttype: ;
     rdfs:range owl:Class ;
@@ -53,13 +53,13 @@ acttype:usedEntityType a owl:ObjectProperty ;
 
 acttype:ActivityType a owl:Class ;
     rdfs:label "Activity type" ;
-    rdfs:comment "A register item that is a type of prov:Activity: a class, declared rdfs:subClassOf prov:Activity (directly or via other registered activity types), whose instances are individual activities. Being a rim:RegisterItem, the type itself carries identifiers, validity and publication status, and a governed change history." ;
+    rdfs:comment "A governed activity type record. Specific activity type classes specialise this class, and their instances inherit register item identifiers, validity and publication status, and a governed change history. Registered types may themselves be classes used to type individual activity records." ;
     rdfs:isDefinedBy acttype: ;
     rdfs:subClassOf rim:RegisterItem .
 
 acttype: a owl:Ontology ;
     dct:creator "Rob Atkinson, OGC" ;
-    dct:description "A profile of the Registered Item Model for registers of prov:Activity types. Restricts the register items of such a register to classes that specialise prov:Activity, lets each type declare the types of PROV entities, agents and activities it relates to, and optionally a prov:Plan describing its required steps. Further profiles specialise both the activity types and those related types." ;
+    dct:description "A profile of the Registered Item Model for registers of activity types. Requires activity type records to belong to the acttype:ActivityType hierarchy, lets each type declare the types of PROV entities, agents and activities it relates to, and optionally a prov:Plan describing its required steps. Further profiles specialise both the activity types and those related types." ;
     dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
     dct:title "Activity Type Register Profile" ;
     owl:imports rim: .
